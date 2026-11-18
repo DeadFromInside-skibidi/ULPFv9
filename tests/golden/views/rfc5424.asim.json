@@ -1,0 +1,170 @@
+{
+  "AdditionalFields": {
+    "x_generic": {
+      "facility": "20",
+      "facility_name": "local4",
+      "hostname": "waf-prod-01",
+      "message": "Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+      "msgid": "ID47",
+      "pri": "165",
+      "severity": "high",
+      "syslog_severity": "5",
+      "syslog_version": "1",
+      "timestamp": "2026-10-21T10:00:03Z"
+    },
+    "x_ulpf": {
+      "event": {
+        "action": "other",
+        "category": "network",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": "91.121.87.10",
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "device": {
+          "hostname": "waf-prod-01",
+          "ip": null,
+          "product": "app",
+          "serial": null,
+          "type": null,
+          "vendor": "Generic",
+          "version": null
+        },
+        "event_type": "syslog_rfc5424",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "26bce5a871e891756647166a68d947d20892126e3cb185cc09bd1aa7ec66d737"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": "Roubaix",
+          "dst_country": "France",
+          "dst_country_code": "FR",
+          "dst_latitude": 50.6942,
+          "dst_longitude": 3.1746,
+          "src_city": "Internal",
+          "src_country": "Private",
+          "src_country_code": "XX",
+          "src_latitude": null,
+          "src_longitude": null
+        },
+        "metadata": {
+          "detection_confidence": 0.95,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "syslog",
+          "parser_name": "Syslog Parser",
+          "parser_version": "1.1.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "26bce5a871e891756647166a68d947d20892126e3cb185cc09bd1aa7ec66d737",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": null,
+          "protocol_number": null,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_event": "<165>1 2026-10-21T10:00:03Z waf-prod-01 app 101 ID47 [attack severity=\"high\"] Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+        "raw_format": "syslog",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": null,
+          "name": null
+        },
+        "severity": 3,
+        "severity_label": "low",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "10.0.2.15",
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "tags": [
+          "threat:brute_force",
+          "ioc_match",
+          "category:network"
+        ],
+        "threat": {
+          "category": "Brute Force",
+          "confidence": 0.87,
+          "cve": [],
+          "ioc_type": "ip",
+          "ioc_value": "91.121.87.10",
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-21T10:00:03+00:00",
+        "timestamp_original": "2026-10-21T10:00:03Z",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": null,
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    }
+  },
+  "DstGeoCity": "Roubaix",
+  "DstGeoCountry": "France",
+  "DstGeoLatitude": 50.6942,
+  "DstGeoLongitude": 3.1746,
+  "DstIpAddr": "91.121.87.10",
+  "Dvc": "waf-prod-01",
+  "DvcHostname": "waf-prod-01",
+  "EventCount": 1,
+  "EventEndTime": "2026-10-21T10:00:03.000000Z",
+  "EventMessage": "Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+  "EventOriginalSeverity": "3",
+  "EventOriginalType": "syslog_rfc5424",
+  "EventProduct": "app",
+  "EventResult": "NA",
+  "EventSchema": "NetworkSession",
+  "EventSchemaVersion": "1.0.0",
+  "EventSeverity": "Low",
+  "EventStartTime": "2026-10-21T10:00:03.000000Z",
+  "EventType": "NetworkSession",
+  "EventUid": "00000000-0000-8000-8000-000000000007",
+  "EventVendor": "Generic",
+  "SrcGeoCity": "Internal",
+  "SrcGeoCountry": "Private",
+  "SrcIpAddr": "10.0.2.15",
+  "SrcProcessId": "101",
+  "SrcProcessName": "app",
+  "ThreatCategory": "Brute Force",
+  "ThreatConfidence": 87,
+  "ThreatIpAddr": "91.121.87.10",
+  "TimeGenerated": "2026-10-21T10:00:03.000000Z"
+}

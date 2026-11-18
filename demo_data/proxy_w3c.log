@@ -1,0 +1,13 @@
+#Software: Squid Proxy 6.0
+#Version: 1.0
+#Date: 2024-08-28 10:00:00
+#Fields: date time c-ip cs-method cs-uri-stem sc-status sc-bytes cs(User-Agent) cs(Referer) s-ip s-port time-taken
+2024-08-28 10:15:01 192.168.1.100 GET http://www.example.com/index.html 200 15234 Mozilla/5.0 - 203.0.113.50 80 120
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User guest logged in from 172.16.0.4
+2024-08-28 10:15:05 192.168.1.102 POST https://api.external.com/data 200 4521 Python-requests/2.31.0 - 198.51.100.20 443 340
+2024-08-28 10:15:10 10.0.2.15 GET http://evil.example.com/malware.exe 200 0 wget/1.21 - 185.220.101.1 80 50
+2024-08-28 10:15:15 192.168.1.100 GET https://corporate-app.internal/dashboard 200 82341 Chrome/120.0 https://portal.internal/ 10.0.1.50 443 89
+2024-08-28 10:15:20 192.168.1.105 CONNECT tunnel.suspicious-site.xyz:443 200 0 Mozilla/5.0 - 45.33.32.156 443 5000
+Transaction 9658 initiated by jdoe on 2024-08-28 10:15:30 with status: allow
+2024-08-28 10:15:25 10.0.2.20 GET http://updates.vendor.com/patch.msi 200 52428800 WindowsUpdate/10.0 - 203.0.113.100 80 15000
+2024-08-28 10:15:30 192.168.1.110 GET https://social-media.com/feed 200 25600 Firefox/121.0 - 198.51.100.50 443 200

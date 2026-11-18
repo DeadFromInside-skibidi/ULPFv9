@@ -1,0 +1,41 @@
+id: isolate-compromised-host
+name: Isolate a compromised endpoint and quarantine the payload
+version: 2
+description: Network-isolates the host through the EDR, quarantines the malicious file by hash, and opens follow-up tasks.
+inputs:
+  machine_id: {required: true}
+  sha1: {}
+  edr: {default: edr}
+triggers:
+  techniques: [T1059, T1059.001, T1486, T1055, T1003, T1003.001]
+  levels: [critical]
+steps:
+  - id: contain_state
+    action: case.transition
+    with: {state: containment}
+    on_failure: continue
+  - id: isolate
+    connector: "{{ inputs.edr }}"
+    action: isolate_host
+    needs: [contain_state]
+    trigger: all_done
+    with: {machine_id: "{{ inputs.machine_id }}", comment: "ULPF case {{ case.id }}"}
+    retries: 2
+  - id: quarantine
+    connector: "{{ inputs.edr }}"
+    action: quarantine_file
+    when: "inputs.sha1"
+    needs: [contain_state]
+    trigger: all_done
+    with: {machine_id: "{{ inputs.machine_id }}", sha1: "{{ inputs.sha1 }}"}
+  - id: tasks
+    type: foreach
+    needs: [isolate]
+    items: "{{ ['Collect memory image of ' + inputs.machine_id, 'Review lateral movement from ' + inputs.machine_id, 'Re-image or clean ' + inputs.machine_id] }}"
+    do: {action: case.add_task, with: {title: "{{ item }}"}}
+  - id: notify
+    type: playbook
+    playbook: notify-soc
+    needs: [isolate, quarantine]
+    trigger: all_done
+    with: {message: "Host {{ inputs.machine_id }} isolated for case {{ case.id }}"}

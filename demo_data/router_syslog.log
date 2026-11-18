@@ -1,0 +1,13 @@
+<134>Aug 28 10:15:01 core-rtr-01 %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.1.100)
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User admin logged in from 10.0.0.12
+<131>Aug 28 10:15:05 edge-fw-01 %SEC-6-IPACCESSLOGP: list OUTSIDE-IN denyed tcp 45.33.32.156(12345) -> 10.0.1.50(445), 1 packet
+<134>Aug 28 10:15:10 core-rtr-01 %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+DEBUG: 2024-08-28 10:15:30 - Process 847 allocated 1044488 bytes of memory
+<130>Aug 28 10:15:15 edge-fw-01 %SEC-2-IPACCESSLOGP: list OUTSIDE-IN blocked tcp 185.220.101.1(49000) -> 10.0.1.25(22), 5 packets
+<133>Aug 28 10:15:20 dist-sw-01 %LINK-3-UPDOWN: Interface FastEthernet0/24, changed state to down
+<134>Aug 28 10:15:25 core-rtr-01 %OSPF-5-ADJCHG: Process 1, Nbr 10.0.0.2 on GigabitEthernet0/0 from LOADING to FULL
+<131>Aug 28 10:15:30 edge-fw-01 %SEC-6-IPACCESSLOGP: list DMZ-OUT permitted tcp 10.0.2.100(8080) -> 203.0.113.50(443), 10 packets
+[2024-08-28 10:15:30] [CUSTOM] [ERR] Connection refused to database at 8.8.8.8:6083
+<129>Aug 28 10:15:35 core-rtr-01 %BGP-3-NOTIFICATION: received from neighbor 198.51.100.1 4/0 (hold time expired)
+<134>Aug 28 10:16:01 dist-sw-01 %STP-5-ROLECHANGE: Port FastEthernet0/1 changed role from Designated to Root
+<131>Aug 28 10:16:10 edge-fw-01 %SEC-6-IPACCESSLOGP: list OUTSIDE-IN allowed udp 91.121.87.10(53) -> 10.0.0.1(53), 100 packets

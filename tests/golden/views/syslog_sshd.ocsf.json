@@ -1,0 +1,207 @@
+{
+  "activity_id": 1,
+  "activity_name": "Logon",
+  "category_name": "Identity & Access Management",
+  "category_uid": 3,
+  "class_name": "Authentication",
+  "class_uid": 3002,
+  "device": {
+    "hostname": "db01",
+    "type": "Unknown",
+    "type_id": 0
+  },
+  "message": "Failed password for root from 45.33.32.156 port 51234 ssh2",
+  "metadata": {
+    "labels": [
+      "threat:scanner",
+      "ioc_match",
+      "critical_severity",
+      "category:authentication"
+    ],
+    "log_name": "syslog",
+    "logged_time": 1792576800000,
+    "original_time": "Oct 11 22:14:15",
+    "product": {
+      "name": "sshd",
+      "vendor_name": "Generic"
+    },
+    "profiles": [
+      "host"
+    ],
+    "uid": "00000000-0000-8000-8000-000000000011",
+    "version": "1.3.0"
+  },
+  "observables": [
+    {
+      "name": "src_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "45.33.32.156"
+    },
+    {
+      "name": "user.name",
+      "type": "User Name",
+      "type_id": 4,
+      "value": "root"
+    }
+  ],
+  "raw_data": "<34>Oct 11 22:14:15 db01 sshd[4721]: Failed password for root from 45.33.32.156 port 51234 ssh2",
+  "severity": "Critical",
+  "severity_id": 5,
+  "src_endpoint": {
+    "ip": "45.33.32.156",
+    "location": {
+      "city": "Fremont",
+      "country": "US",
+      "lat": 37.5485,
+      "long": -121.9886
+    },
+    "port": 51234
+  },
+  "status": "Failure",
+  "status_id": 2,
+  "time": 1791756855000,
+  "type_name": "Authentication: Logon",
+  "type_uid": 300201,
+  "unmapped": {
+    "x_generic": {
+      "action": "failed",
+      "app_name": "sshd",
+      "facility": "4",
+      "facility_name": "auth",
+      "hostname": "db01",
+      "message": "Failed password for root from 45.33.32.156 port 51234 ssh2",
+      "pid": "4721",
+      "pri": "34",
+      "syslog_severity": "2",
+      "timestamp": "Oct 11 22:14:15"
+    },
+    "x_ulpf": {
+      "event": {
+        "action": "failed",
+        "category": "authentication",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": null,
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "device": {
+          "hostname": "db01",
+          "ip": null,
+          "product": "sshd",
+          "serial": null,
+          "type": null,
+          "vendor": "Generic",
+          "version": null
+        },
+        "event_type": "syslog_rfc3164",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "f4331f97e53b60a81885e6c2c8460cb0ef7b0e7341b824d0592443f83f4a8b10"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": null,
+          "dst_country": null,
+          "dst_country_code": null,
+          "dst_latitude": null,
+          "dst_longitude": null,
+          "src_city": "Fremont",
+          "src_country": "United States",
+          "src_country_code": "US",
+          "src_latitude": 37.5485,
+          "src_longitude": -121.9886
+        },
+        "metadata": {
+          "detection_confidence": 0.92,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "syslog",
+          "parser_name": "Syslog Parser",
+          "parser_version": "1.1.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "f4331f97e53b60a81885e6c2c8460cb0ef7b0e7341b824d0592443f83f4a8b10",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": null,
+          "protocol_number": null,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_format": "syslog",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": null,
+          "name": null
+        },
+        "severity": 9,
+        "severity_label": "critical",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "45.33.32.156",
+          "mac": null,
+          "port": 51234,
+          "zone": null
+        },
+        "tags": [
+          "threat:scanner",
+          "ioc_match",
+          "critical_severity",
+          "category:authentication"
+        ],
+        "threat": {
+          "category": "Scanner",
+          "confidence": 0.95,
+          "cve": [],
+          "ioc_type": "ip",
+          "ioc_value": "45.33.32.156",
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-11T22:14:15+00:00",
+        "timestamp_original": "Oct 11 22:14:15",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": "root",
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    }
+  },
+  "user": {
+    "name": "root"
+  }
+}

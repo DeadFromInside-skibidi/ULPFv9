@@ -1,0 +1,111 @@
+{
+  "@timestamp": "2026-10-21T10:00:03+00:00",
+  "destination": {
+    "address": "91.121.87.10",
+    "geo": {
+      "city_name": "Roubaix",
+      "country_iso_code": "FR",
+      "country_name": "France",
+      "location": {
+        "lat": 50.6942,
+        "lon": 3.1746
+      }
+    },
+    "ip": "91.121.87.10"
+  },
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "other",
+    "category": [
+      "network"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "syslog",
+    "hash": "26bce5a871e891756647166a68d947d20892126e3cb185cc09bd1aa7ec66d737",
+    "id": "00000000-0000-8000-8000-000000000007",
+    "kind": "event",
+    "original": "<165>1 2026-10-21T10:00:03Z waf-prod-01 app 101 ID47 [attack severity=\"high\"] Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+    "outcome": "unknown",
+    "severity": 3,
+    "type": [
+      "syslog_rfc5424"
+    ]
+  },
+  "message": "Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+  "observer": {
+    "hostname": "waf-prod-01",
+    "product": "app",
+    "vendor": "Generic"
+  },
+  "related": {
+    "hosts": [
+      "waf-prod-01"
+    ],
+    "ip": [
+      "10.0.2.15",
+      "91.121.87.10"
+    ]
+  },
+  "source": {
+    "address": "10.0.2.15",
+    "geo": {
+      "city_name": "Internal",
+      "country_iso_code": "XX",
+      "country_name": "Private"
+    },
+    "ip": "10.0.2.15"
+  },
+  "tags": [
+    "threat:brute_force",
+    "ioc_match",
+    "category:network"
+  ],
+  "threat": {
+    "indicator": {
+      "confidence": 0.87,
+      "name": "91.121.87.10",
+      "type": "ip"
+    }
+  },
+  "ulpf": {
+    "category": "network",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "26bce5a871e891756647166a68d947d20892126e3cb185cc09bd1aa7ec66d737"
+    },
+    "metadata": {
+      "detection_confidence": 0.95,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "syslog",
+      "parser_name": "Syslog Parser",
+      "parser_version": "1.1.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "26bce5a871e891756647166a68d947d20892126e3cb185cc09bd1aa7ec66d737",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "app_name": "app",
+      "devname": "waf-prod-01",
+      "dst_ip": "91.121.87.10",
+      "facility": "20",
+      "facility_name": "local4",
+      "hostname": "waf-prod-01",
+      "message": "Suspicious beacon from 10.0.2.15 to 91.121.87.10:8080",
+      "msgid": "ID47",
+      "pid": "101",
+      "pri": "165",
+      "severity": "high",
+      "src_ip": "10.0.2.15",
+      "syslog_severity": "5",
+      "syslog_version": "1",
+      "timestamp": "2026-10-21T10:00:03Z"
+    },
+    "raw_format": "syslog",
+    "severity_label": "low",
+    "threat_category": "Brute Force",
+    "timestamp_original": "2026-10-21T10:00:03Z"
+  }
+}

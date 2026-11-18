@@ -1,0 +1,192 @@
+{
+  "activity_id": 1,
+  "activity_name": "Logon",
+  "category_name": "Identity & Access Management",
+  "category_uid": 3,
+  "class_name": "Authentication",
+  "class_uid": 3002,
+  "device": {
+    "hostname": "DC01",
+    "type": "Unknown",
+    "type_id": 0
+  },
+  "metadata": {
+    "event_code": "4625",
+    "labels": [
+      "category:audit"
+    ],
+    "log_name": "xml",
+    "log_provider": "Microsoft-Windows-Security-Auditing",
+    "logged_time": 1792576800000,
+    "original_time": "2026-10-21T10:00:05.000Z",
+    "product": {
+      "name": "event",
+      "vendor_name": "Unknown"
+    },
+    "profiles": [
+      "host"
+    ],
+    "uid": "00000000-0000-8000-8000-000000000011",
+    "version": "1.3.0"
+  },
+  "observables": [
+    {
+      "name": "src_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "103.224.182.7"
+    },
+    {
+      "name": "user.name",
+      "type": "User Name",
+      "type_id": 4,
+      "value": "administrator"
+    }
+  ],
+  "raw_data": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Security-Auditing'/><EventID>4625</EventID><TimeCreated SystemTime='2026-10-21T10:00:05.000Z'/><Computer>DC01</Computer></System><EventData><Data Name='TargetUserName'>administrator</Data><Data Name='IpAddress'>103.224.182.7</Data></EventData></Event>",
+  "severity": "Unknown",
+  "severity_id": 0,
+  "src_endpoint": {
+    "ip": "103.224.182.7",
+    "location": {
+      "city": "Beijing",
+      "country": "CN",
+      "lat": 39.9042,
+      "long": 116.4074
+    }
+  },
+  "status": "Failure",
+  "status_id": 2,
+  "time": 1792576805000,
+  "type_name": "Authentication: Logon",
+  "type_uid": 300201,
+  "unmapped": {
+    "x_ulpf": {
+      "event": {
+        "action": "other",
+        "category": "audit",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": null,
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "device": {
+          "hostname": "DC01",
+          "ip": null,
+          "product": "event",
+          "serial": null,
+          "type": null,
+          "vendor": "Unknown",
+          "version": null
+        },
+        "event_type": "4625",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "85c4657c46ad9e332c29e9c0bc93aa718be322cecc99d62327d45797ddf959b2"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": null,
+          "dst_country": null,
+          "dst_country_code": null,
+          "dst_latitude": null,
+          "dst_longitude": null,
+          "src_city": "Beijing",
+          "src_country": "China",
+          "src_country_code": "CN",
+          "src_latitude": 39.9042,
+          "src_longitude": 116.4074
+        },
+        "metadata": {
+          "detection_confidence": 0.92,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "xml",
+          "parser_name": "XML Parser",
+          "parser_version": "1.1.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "85c4657c46ad9e332c29e9c0bc93aa718be322cecc99d62327d45797ddf959b2",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": null,
+          "protocol_number": null,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_format": "xml",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": null,
+          "name": null
+        },
+        "severity": 0,
+        "severity_label": "unknown",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "103.224.182.7",
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "tags": [
+          "category:audit"
+        ],
+        "threat": {
+          "category": null,
+          "confidence": null,
+          "cve": [],
+          "ioc_type": null,
+          "ioc_value": null,
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-21T10:00:05+00:00",
+        "timestamp_original": "2026-10-21T10:00:05.000Z",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": "administrator",
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": "administrator"
+          }
+        }
+      },
+      "v": 1
+    },
+    "x_unknown": {
+      "event.system.timecreated.systemtime": "2026-10-21T10:00:05.000Z"
+    }
+  },
+  "user": {
+    "name": "administrator"
+  }
+}

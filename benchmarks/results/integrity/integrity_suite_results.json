@@ -1,0 +1,242 @@
+{
+  "total_tests": 6,
+  "passed": 6,
+  "failed": 0,
+  "pass_rate_pct": 100.0,
+  "tests": [
+    {
+      "test": "Section 13: Raw Byte Integrity",
+      "pass": true,
+      "details": {
+        "summary": "484/484 events verified; 0 mismatches",
+        "events_checked": 484,
+        "mismatches": 0,
+        "mismatch_samples": []
+      }
+    },
+    {
+      "test": "Section 14: Forensic Integrity Verification",
+      "pass": true,
+      "details": {
+        "summary": "All 6 manipulations detected; original verified",
+        "original_valid": true,
+        "manipulations": {
+          "modified_record": true,
+          "deleted_record": true,
+          "inserted_record": true,
+          "reordered_record": true,
+          "altered_hash": true,
+          "altered_timestamp": true
+        },
+        "legal_disclaimer": "Engineering verification only; does not claim legal admissibility."
+      }
+    },
+    {
+      "test": "Section 12: Crash/Recovery & Failure Handling",
+      "pass": true,
+      "details": {
+        "summary": "DB integrity retained; new ingestion resumed; port collision & malformed events trapped",
+        "db_reopened": true,
+        "retained_events_count": 417530,
+        "new_ingestion_ok": true,
+        "port_occupied_graceful": true,
+        "malformed_events_handled": true
+      }
+    },
+    {
+      "test": "Section 15: Format Drift Detection",
+      "pass": true,
+      "details": {
+        "summary": "5 formats tested (reordered, added, removed, delimiter, type); 0 FP, 0 FN; avg latency 233.305ms",
+        "zero_false_positives": true,
+        "zero_false_negatives": true,
+        "all_drifts_detected": true,
+        "average_latency_ms": 233.305,
+        "results": [
+          {
+            "format": "syslog3164",
+            "drift_type": "header removed & token order reversed",
+            "clean_similarity": 0.9987,
+            "drifted_similarity": 0.4987,
+            "false_positive": false,
+            "false_negative": false,
+            "drift_detected": true,
+            "detection_latency_ms": 188.462
+          },
+          {
+            "format": "json",
+            "drift_type": "added_fields & removed_fields & type_change",
+            "clean_similarity": 0.9666,
+            "drifted_similarity": 0.3467,
+            "false_positive": false,
+            "false_negative": false,
+            "drift_detected": true,
+            "detection_latency_ms": 414.678
+          },
+          {
+            "format": "cef",
+            "drift_type": "delimiter_change & reordered_fields",
+            "clean_similarity": 0.9998,
+            "drifted_similarity": 0.3835,
+            "false_positive": false,
+            "false_negative": false,
+            "drift_detected": true,
+            "detection_latency_ms": 247.561
+          },
+          {
+            "format": "leef",
+            "drift_type": "delimiter_change (tab \u2192 spaces) & version change",
+            "clean_similarity": 0.9998,
+            "drifted_similarity": 0.9152,
+            "false_positive": false,
+            "false_negative": false,
+            "drift_detected": true,
+            "detection_latency_ms": 263.537
+          },
+          {
+            "format": "csv",
+            "drift_type": "delimiter_change",
+            "clean_similarity": 0.9988,
+            "drifted_similarity": 0.9519,
+            "false_positive": false,
+            "false_negative": false,
+            "drift_detected": true,
+            "detection_latency_ms": 52.288
+          }
+        ]
+      }
+    },
+    {
+      "test": "Section 16: Auto-Parser Generator (APG) Performance",
+      "pass": true,
+      "details": {
+        "summary": "7/7 unknown formats learned; min coverage on unseen lines 100.0%; min field accuracy 100.0%; autonomous learning after 233 lines",
+        "elapsed_sec": 2.19,
+        "per_format": {
+          "pipe_app": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "UNKNOWN-APP-LOG | {timestamp} | User {name} logged in from {ip}",
+            "rejected": [],
+            "learn_ms": 16.1,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "src_ip": 100.0,
+              "user": 100.0
+            },
+            "eps": 13452,
+            "pass": true
+          },
+          "bracket_app": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "[{timestamp}] [{field_1}] [{severity}] Connection refused to database at {ip}",
+            "rejected": [],
+            "learn_ms": 18.2,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "dst_ip": 100.0,
+              "dst_port": 100.0
+            },
+            "eps": 11539,
+            "pass": true
+          },
+          "transaction": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "Transaction {numeric_1} initiated by {name} on {timestamp} with status: {action}",
+            "rejected": [],
+            "learn_ms": 20.2,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "user": 100.0,
+              "action": 100.0
+            },
+            "eps": 16722,
+            "pass": true
+          },
+          "multichar": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "*{severity}* }|{ {timestamp} }|{ auth-engine }|{ (({field_3})) }|{ +{field_4}+",
+            "rejected": [],
+            "learn_ms": 28.5,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "severity": 100.0
+            },
+            "eps": 11527,
+            "pass": true
+          },
+          "log4j": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "{severity} {timestamp} [{hostname}] com.acme.PaymentService - Payment {action} for order {numeric_10} from {ip}",
+            "rejected": [],
+            "learn_ms": 23.5,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "src_ip": 100.0,
+              "severity": 100.0
+            },
+            "eps": 8240,
+            "pass": true
+          },
+          "scada_semicolon": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "{hostname};{timestamp};{field_2};{numeric_3};{field_4}",
+            "rejected": [],
+            "learn_ms": 11.7,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0
+            },
+            "eps": 9972,
+            "pass": true
+          },
+          "apache_error": {
+            "accepted": 1,
+            "known_lines_in_training": 0,
+            "template": "[{timestamp}] [{severity}] [client {ip}] File does not exist: {path_7}",
+            "rejected": [],
+            "learn_ms": 25.0,
+            "coverage_pct": 100.0,
+            "field_accuracy_pct": {
+              "timestamp": 100.0,
+              "src_ip": 100.0
+            },
+            "eps": 7060,
+            "pass": true
+          }
+        },
+        "autonomous": {
+          "format": "log4j",
+          "lines": 5000,
+          "learned_after_lines": 233,
+          "learned_after_sec": 0.1,
+          "coverage_after_learning_pct": 100.0,
+          "parser_states": [
+            "canary"
+          ],
+          "pass": true
+        }
+      }
+    },
+    {
+      "test": "Section 17: Air-Gap Network Validation",
+      "pass": true,
+      "details": {
+        "summary": "0 external network/DNS connections during full lifecycle; 0 local events inspected",
+        "external_connections_detected": 0,
+        "total_socket_operations_inspected": 0,
+        "external_attempts": []
+      }
+    }
+  ]
+}

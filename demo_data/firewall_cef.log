@@ -1,0 +1,15 @@
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Accept|Firewall Rule Accept|3|rt=2024-08-28 10:15:01 src=192.168.1.100 dst=203.0.113.50 spt=52341 dpt=443 proto=TCP act=Accept msg=HTTPS connection allowed cs1=Corporate_Web cs1Label=RuleName
+CEF:0|Palo Alto Networks|PAN-OS|11.0|threat|URL Filtering Alert|7|rt=2024-08-28 10:15:05 src=10.0.2.15 dst=185.220.101.1 spt=49832 dpt=80 proto=TCP act=allow-url cat=malware requestUrl=http://evil.example.com/payload.exe cs1=URL-Filter cs1Label=RuleName msg=Blocked malicious URL download attempt
+[2024-08-28 10:15:30] [CUSTOM] [ERR] Connection refused to database at 10.0.0.12:43959
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Accept|Firewall Rule Accept|8|rt=2024-08-28 10:15:10 src=45.33.32.156 dst=10.0.1.50 spt=12345 dpt=4444 proto=TCP act=allow msg=Suspicious port connection blocked
+CEF:0|Palo Alto Networks|PAN-OS|11.0|traffic|end|1|rt=2024-08-28 10:15:15 src=192.168.10.5 dst=198.51.100.20 spt=55123 dpt=53 proto=UDP act=allow app=dns in=120 out=340 msg=DNS query to external resolver
+DEBUG: 2024-08-28 10:15:30 - Process 4831 allocated 3307 bytes of memory
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Drop|Firewall Rule Drop|2|rt=2024-08-28 10:15:20 src=10.0.0.25 dst=91.121.87.10 spt=38291 dpt=22 proto=TCP act=Drop msg=SSH session established
+CEF:0|Palo Alto Networks|PAN-OS|11.0|threat|Spyware Detection|9|rt=2024-08-28 10:15:25 src=103.224.182.250 dst=192.168.5.100 spt=80 dpt=52000 proto=TCP act=alert cat=spyware msg=Spyware callback detected from compromised host
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User guest logged in from 10.0.0.12
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Accept|IPS Alert|8|rt=2024-08-28 10:15:30 src=177.54.150.200 dst=10.0.1.100 spt=31337 dpt=445 proto=TCP act=allow msg=Exploit attempt EternalBlue blocked
+CEF:0|Palo Alto Networks|PAN-OS|11.0|traffic|start|1|rt=2024-08-28 10:15:35 src=192.168.1.50 dst=156.234.10.5 spt=60001 dpt=8080 proto=TCP act=deny app=web-browsing in=0 out=500 msg=HTTP proxy connection
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User jdoe logged in from 172.16.0.4
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Accept|VPN IKE|3|rt=2024-08-28 10:15:40 src=203.0.113.15 dst=10.0.0.1 spt=500 dpt=500 proto=UDP act=Accept msg=IKE Phase 1 negotiation completed
+CEF:0|Palo Alto Networks|PAN-OS|11.0|threat|Vulnerability|10|rt=2024-08-28 10:15:45 src=91.121.87.10 dst=10.0.1.25 spt=443 dpt=8443 proto=TCP act=allow-both cat=critical msg=Critical RCE vulnerability exploit attempt blocked
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User admin logged in from 10.0.0.12

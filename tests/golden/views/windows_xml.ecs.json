@@ -1,0 +1,90 @@
+{
+  "@timestamp": "2026-10-21T10:00:05+00:00",
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "other",
+    "category": [
+      "configuration"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "xml",
+    "hash": "85c4657c46ad9e332c29e9c0bc93aa718be322cecc99d62327d45797ddf959b2",
+    "id": "00000000-0000-8000-8000-000000000011",
+    "kind": "event",
+    "original": "<Event xmlns='http://schemas.microsoft.com/win/2004/08/events/event'><System><Provider Name='Microsoft-Windows-Security-Auditing'/><EventID>4625</EventID><TimeCreated SystemTime='2026-10-21T10:00:05.000Z'/><Computer>DC01</Computer></System><EventData><Data Name='TargetUserName'>administrator</Data><Data Name='IpAddress'>103.224.182.7</Data></EventData></Event>",
+    "outcome": "unknown",
+    "severity": 0,
+    "type": [
+      "4625"
+    ]
+  },
+  "observer": {
+    "hostname": "DC01",
+    "product": "event",
+    "vendor": "Unknown"
+  },
+  "related": {
+    "hosts": [
+      "DC01"
+    ],
+    "ip": [
+      "103.224.182.7"
+    ],
+    "user": [
+      "administrator"
+    ]
+  },
+  "source": {
+    "address": "103.224.182.7",
+    "geo": {
+      "city_name": "Beijing",
+      "country_iso_code": "CN",
+      "country_name": "China",
+      "location": {
+        "lat": 39.9042,
+        "lon": 116.4074
+      }
+    },
+    "ip": "103.224.182.7"
+  },
+  "tags": [
+    "category:audit"
+  ],
+  "ulpf": {
+    "category": "audit",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "85c4657c46ad9e332c29e9c0bc93aa718be322cecc99d62327d45797ddf959b2"
+    },
+    "metadata": {
+      "detection_confidence": 0.92,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "xml",
+      "parser_name": "XML Parser",
+      "parser_version": "1.1.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "85c4657c46ad9e332c29e9c0bc93aa718be322cecc99d62327d45797ddf959b2",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "event.eventdata.ipaddress": "103.224.182.7",
+      "event.eventdata.targetusername": "administrator",
+      "event.system.computer": "DC01",
+      "event.system.eventid": "4625",
+      "event.system.provider.name": "Microsoft-Windows-Security-Auditing",
+      "event.system.timecreated.systemtime": "2026-10-21T10:00:05.000Z"
+    },
+    "raw_format": "xml",
+    "severity_label": "unknown",
+    "timestamp_original": "2026-10-21T10:00:05.000Z"
+  },
+  "user": {
+    "name": "administrator",
+    "target": {
+      "name": "administrator"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+# ULPF pipeline configuration (v9)
+# Validate with:  ulpf config check config/pipeline.example.yaml
+# Run with:       ulpf run --config config/pipeline.example.yaml
+#
+# Secrets are never written here: options ending in _env name an environment
+# variable that holds the secret.
+
+mode: industry            # industry | defence  (defence: TLS, allow-listed destinations,
+                          # encrypted journal, operator-approved learned parsers)
+
+workers: auto             # worker processes (auto = CPU cores - 1)
+
+journal:                  # durable input log = raw archive + replay + evidence feed
+  sync: interval          # always | interval | never  (defence default: always)
+  sync_interval_ms: 200
+  segment_mb: 64
+  retention_days: 30      # defence default: 180
+  # encrypt: true         # AES-256-GCM at rest (always on in defence mode)
+
+inputs:
+  - type: syslog
+    name: syslog-tcp
+    protocol: tcp         # udp | tcp | tls
+    host: 0.0.0.0
+    port: 5514
+    allow_sources: []     # CIDRs allowed to send; empty = anyone
+    tags: [perimeter]
+
+  - type: syslog
+    name: syslog-udp
+    protocol: udp
+    host: 0.0.0.0
+    port: 5514
+
+  - type: file
+    name: app-logs
+    paths: ["/var/log/app/*.log"]
+    start_from: end
+    multiline:
+      start_pattern: '^\d{4}-\d{2}-\d{2}'   # Java/Python stack traces stay with their event
+    enabled: false
+
+  - type: http            # POST /api/v1/ingest/{source} (NDJSON, JSON array or text lines)
+    name: http
+    api_key_env: ULPF_INGEST_KEY
+    enabled: false
+
+  - type: otlp            # POST /v1/logs (OpenTelemetry, protobuf or JSON)
+    name: otlp
+    enabled: false
+
+outputs:
+  - type: duckdb          # the local store used by the API, CLI and desktop app
+    name: store
+
+  - type: parquet         # data lake (partitioned, ML-ready flat columns)
+    name: lake
+    path: ./lake
+    partition: [dt, category]
+
+  - type: elasticsearch
+    name: siem
+    urls: ["https://elastic.example.local:9200"]
+    index: "ulpf-%Y.%m.%d"
+    api_key_env: ULPF_ES_API_KEY
+    view: ecs             # unified | ecs | ocsf
+    buffer: {max_mb: 2048, when_full: block}
+    enabled: false
+
+  - type: splunk_hec
+    name: splunk
+    url: "https://splunk.example.local:8088"
+    token_env: ULPF_HEC_TOKEN
+    enabled: false
+
+  - type: syslog          # e.g. QRadar via LEEF
+    name: qradar
+    host: qradar.example.local
+    port: 6514
+    protocol: tls
+    format: leef
+    enabled: false
+
+routes:
+  - name: everything-to-store-and-lake
+    to: [store, lake]
+  # - name: high-severity-to-siem
+  #   when: {severity_gte: 7}
+  #   to: [siem]
+  # - name: evidence-seals-off-box
+  #   when: {kind_in: [seal, correlation, drift]}
+  #   to: [siem]
+
+default_output: store
+
+airgap:
+  allow: []               # hosts / CIDRs outputs may reach (enforced in defence mode)
+
+evidence:
+  enabled: true           # rolling Merkle seals over every journaled record
+  # seal_every_events: 10000
+  # seal_every_seconds: 300
+  # row_mac: true         # MAC every stored row (default in defence mode; ~17 % throughput)
+
+analytics:
+  correlation: {enabled: true, window_seconds: 60, max_groups: 2000, max_group_events: 1000}
+  anomaly: {enabled: true, new_ip_warmup_events: 10000}
+  drift: {enabled: true, sample_lines: 500, min_interval_seconds: 5}
+
+learning:
+  autonomous: true        # learn unknown formats from live traffic
+  # approval_required: true   # always true in defence mode
+  max_parsers_per_source: 20
+
+plugins:                  # installed `ulpf.parsers` entry-point packages
+  enabled: true
+  # allow: [<sha256 from `ulpf plugins list`>]   # required in defence mode
+
+# cluster:                # several ingest nodes sharing one directory (docs/MULTI_NODE.md)
+#   enabled: true
+#   shared_dir: /mnt/ulpf-shared
+#   heartbeat_seconds: 2
+#   failover_seconds: 10
+#   nodes:
+#     - {id: ingest-1, address: "https://ingest-1.local:8000"}
+#     - {id: ingest-2, address: "https://ingest-2.local:8000"}
+
+api:
+  enabled: true
+  host: 127.0.0.1
+  port: 8000
+
+dlq:
+  max_mb: 512
+  retention_days: 7

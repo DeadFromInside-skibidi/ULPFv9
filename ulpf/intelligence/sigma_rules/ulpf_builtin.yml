@@ -1,0 +1,392 @@
+# ULPF built-in Sigma rules (https://sigmahq.io specification).
+# Written against ULPF's unified event fields, so they apply to every input
+# format (syslog, CEF, LEEF, JSON, KV, Windows XML, learned formats). Raw
+# vendor field names (EventID, IpAddress, ...) also resolve, through the
+# event's parsed_fields. Add your own rules with analytics.sigma.rules.
+title: Brute force - repeated authentication failures from one source
+id: ulpf-0001-brute-force
+status: stable
+description: More than 4 failed logins from the same source address within 5 minutes.
+logsource:
+  category: authentication
+detection:
+  selection:
+    action: failed
+  timeframe: 5m
+  condition: selection | count() by source.ip > 4
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110
+  - attack.t1110.001
+---
+title: Password spraying - one source failing against many accounts
+id: ulpf-0002-password-spraying
+status: stable
+description: Failed logins for more than 5 distinct accounts from one source within 10 minutes.
+logsource:
+  category: authentication
+detection:
+  selection:
+    action: failed
+  timeframe: 10m
+  condition: selection | count(user.name) by source.ip > 5
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110.003
+---
+title: Windows logon failures (4625) from one address
+id: ulpf-0003-windows-logon-failures
+status: stable
+description: Security event 4625 more than 5 times from one IpAddress within 5 minutes.
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4625
+  timeframe: 5m
+  condition: selection | count() by IpAddress > 5
+level: high
+tags:
+  - attack.credential_access
+  - attack.t1110
+---
+title: Privileged account logon from a public address
+id: ulpf-0004-privileged-logon-external
+status: stable
+description: A successful logon of root/administrator from an address outside private ranges.
+logsource:
+  category: authentication
+detection:
+  selection:
+    action:
+      - success
+      - allowed
+    user.name:
+      - root
+      - administrator
+      - admin
+  private:
+    source.ip|cidr:
+      - 10.0.0.0/8
+      - 172.16.0.0/12
+      - 192.168.0.0/16
+      - 127.0.0.0/8
+      - fc00::/7
+  condition: selection and not private
+level: medium
+tags:
+  - attack.initial_access
+  - attack.persistence
+  - attack.t1078
+---
+title: Port scan or service discovery
+id: ulpf-0005-port-scan
+status: stable
+description: Scanner tooling or a scan detection message.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'nmap'
+    - 'port scan'
+    - 'portscan'
+    - 'scan detected'
+    - 'attempted-recon'
+  condition: keywords
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1046
+---
+title: Many blocked destination ports from one source
+id: ulpf-0006-blocked-port-sweep
+status: stable
+description: Connections to more than 20 distinct destination ports denied for one source within a minute.
+logsource:
+  product: ulpf
+detection:
+  selection:
+    action:
+      - denied
+      - blocked
+      - dropped
+  timeframe: 1m
+  condition: selection | count(destination.port) by source.ip > 20
+level: medium
+tags:
+  - attack.discovery
+  - attack.t1046
+---
+title: Vulnerability scanner activity
+id: ulpf-0007-vulnerability-scanner
+status: stable
+description: Known vulnerability scanners in requests or alerts.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'nikto'
+    - 'masscan'
+    - 'zgrab'
+    - 'sqlmap'
+    - 'acunetix'
+    - 'nessus'
+    - 'vulnerability scan'
+  condition: keywords
+level: medium
+tags:
+  - attack.reconnaissance
+  - attack.t1595.002
+---
+title: Exploitation of a public-facing application
+id: ulpf-0008-web-exploit
+status: stable
+description: Injection, traversal, RCE and known exploit signatures in web or IDS events.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'sql injection'
+    - 'sqli'
+    - 'union select'
+    - '../../'
+    - '<script'
+    - 'xss'
+    - 'remote code execution'
+    - 'command injection'
+    - '${jndi:'
+    - 'log4shell'
+    - 'cve-'
+  condition: keywords
+level: high
+tags:
+  - attack.initial_access
+  - attack.t1190
+---
+title: Web shell access
+id: ulpf-0009-web-shell
+status: stable
+description: Requests to or alerts about common web shells.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'webshell'
+    - 'web shell'
+    - 'c99.php'
+    - 'r57.php'
+    - 'shell.php'
+    - 'cmd.php'
+    - '.aspx?cmd='
+    - 'china chopper'
+  condition: keywords
+level: high
+tags:
+  - attack.persistence
+  - attack.t1505.003
+---
+title: Command and scripting interpreter abuse
+id: ulpf-0010-script-interpreter
+status: stable
+description: Encoded PowerShell, shell one-liners and download-and-execute patterns.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'powershell -enc'
+    - 'powershell.exe -e'
+    - '-encodedcommand'
+    - 'invoke-expression'
+    - 'iex('
+    - 'cmd.exe /c'
+    - '/bin/sh -c'
+    - 'bash -i'
+    - '| sh'
+    - 'wget http'
+    - 'curl http'
+  condition: keywords
+level: high
+tags:
+  - attack.execution
+  - attack.t1059
+---
+title: Command and control beaconing
+id: ulpf-0011-c2-beacon
+status: stable
+description: Beacon, C2 and known framework indicators, or a threat-intel C2 category.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'beacon'
+    - 'command and control'
+    - 'command-and-control'
+    - 'c2 server'
+    - 'cobalt strike'
+    - 'trojan-activity'
+    - 'callback to'
+  ioc:
+    threat.category:
+      - c2 server
+      - c2 domain
+      - botnet
+  condition: keywords or ioc
+level: high
+tags:
+  - attack.command_and_control
+  - attack.t1071
+---
+title: Connection to a known backdoor or proxy port
+id: ulpf-0012-backdoor-port
+status: stable
+description: Allowed traffic to ports used by backdoors, IRC botnets and SOCKS/Tor proxies.
+logsource:
+  product: ulpf
+detection:
+  selection:
+    destination.port:
+      - 4444
+      - 5555
+      - 6666
+      - 6667
+      - 31337
+      - 12345
+      - 27374
+      - 1080
+      - 9050
+      - 9150
+  denied:
+    action:
+      - denied
+      - blocked
+      - dropped
+  condition: selection and not denied
+level: medium
+tags:
+  - attack.command_and_control
+  - attack.t1571
+---
+title: DNS or protocol tunneling
+id: ulpf-0013-tunneling
+status: stable
+description: Tunneling tools or tunneling detections.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'dns tunnel'
+    - 'dnscat'
+    - 'iodine'
+    - 'tunneling'
+  condition: keywords
+level: high
+tags:
+  - attack.command_and_control
+  - attack.t1572
+  - attack.t1071.004
+---
+title: Large outbound transfer
+id: ulpf-0014-large-upload
+status: stable
+description: A single session sending more than 100 MB out.
+logsource:
+  product: ulpf
+detection:
+  selection:
+    network.bytes_out|gte: 100000000
+  condition: selection
+level: medium
+tags:
+  - attack.exfiltration
+  - attack.t1048
+---
+title: Data exfiltration detection
+id: ulpf-0015-exfiltration
+status: stable
+description: Exfiltration or data-leak detections from DLP, IDS or proxies.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'exfil'
+    - 'data leak'
+    - 'data theft'
+  condition: keywords
+level: high
+tags:
+  - attack.exfiltration
+  - attack.t1041
+---
+title: Phishing delivery
+id: ulpf-0016-phishing
+status: stable
+description: Phishing, malicious attachment or credential-harvesting detections.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'phish'
+    - 'malicious attachment'
+    - 'malicious url'
+    - 'credential harvest'
+  condition: keywords
+level: high
+tags:
+  - attack.initial_access
+  - attack.t1566
+---
+title: Malware or tool transfer detected
+id: ulpf-0017-malware-transfer
+status: stable
+description: Malware, trojan or dropper detections.
+logsource:
+  product: ulpf
+detection:
+  keywords:
+    - 'trojan'
+    - 'malware'
+    - 'dropper'
+    - 'ransomware'
+  condition: keywords
+level: high
+tags:
+  - attack.command_and_control
+  - attack.t1105
+---
+title: Windows account created (4720)
+id: ulpf-0018-account-created
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    EventID: 4720
+  condition: selection
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1136
+---
+title: Audit log cleared
+id: ulpf-0019-log-cleared
+status: stable
+logsource:
+  product: ulpf
+detection:
+  windows:
+    EventID:
+      - 1102
+      - 104
+  keywords:
+    - 'audit log was cleared'
+    - 'log cleared'
+    - 'history -c'
+  condition: windows or keywords
+level: high
+tags:
+  - attack.defense_evasion
+  - attack.t1070

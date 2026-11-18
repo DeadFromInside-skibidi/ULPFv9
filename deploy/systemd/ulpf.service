@@ -1,0 +1,41 @@
+# /etc/systemd/system/ulpf.service
+#   useradd --system --home /var/lib/ulpf --shell /usr/sbin/nologin ulpf
+#   install -d -o ulpf -g ulpf /var/lib/ulpf /etc/ulpf
+#   cp config/pipeline.example.yaml /etc/ulpf/pipeline.yaml && ulpf config check /etc/ulpf/pipeline.yaml
+#   systemctl daemon-reload && systemctl enable --now ulpf
+#   systemctl reload ulpf      # re-read the config (validated first; an invalid file changes nothing)
+[Unit]
+Description=ULPF universal log pre-processing pipeline
+Documentation=file:///opt/ulpf/docs/INSTALLATION.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ulpf
+Group=ulpf
+Environment=ULPF_DATA_DIR=/var/lib/ulpf
+Environment=PYTHONUNBUFFERED=1
+# Secrets (API keys, sink tokens) in a root-readable file, referenced by *_env options
+EnvironmentFile=-/etc/ulpf/ulpf.env
+ExecStart=/opt/ulpf/venv/bin/ulpf run --config /etc/ulpf/pipeline.yaml
+ExecReload=/bin/kill -HUP $MAINPID
+# Inputs stop first, then workers and sinks drain; give them time
+TimeoutStopSec=90
+KillSignal=SIGTERM
+Restart=on-failure
+RestartSec=5
+LimitNOFILE=65536
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/ulpf
+# Ports below 1024 (e.g. syslog 514) without running as root
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

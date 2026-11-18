@@ -1,0 +1,106 @@
+{
+  "@timestamp": "2026-10-21T10:00:04+00:00",
+  "destination": {
+    "address": "10.0.0.5",
+    "geo": {
+      "city_name": "Internal",
+      "country_iso_code": "XX",
+      "country_name": "Private"
+    },
+    "ip": "10.0.0.5",
+    "port": 53
+  },
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "other",
+    "category": [
+      "network"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "json",
+    "hash": "28a7343d2d0ba5944d56f37b2a4fe9d2dceb277cc972c93abb6dfed02e6d6d33",
+    "id": "00000000-0000-8000-8000-000000000013",
+    "kind": "event",
+    "original": "{\"timestamp\":\"2026-10-21T10:00:04Z\",\"event_type\":\"alert\",\"src_ip\":\"177.54.150.200\",\"src_port\":53211,\"dest_ip\":\"10.0.0.5\",\"dest_port\":53,\"proto\":\"UDP\",\"alert\":{\"signature\":\"ET MALWARE DNS Query to C2 Domain\",\"severity\":1}}",
+    "outcome": "unknown",
+    "severity": 1,
+    "type": [
+      "alert"
+    ]
+  },
+  "network": {
+    "iana_number": "17",
+    "transport": "udp"
+  },
+  "observer": {
+    "product": "JSON Source",
+    "vendor": "Unknown"
+  },
+  "related": {
+    "ip": [
+      "10.0.0.5",
+      "177.54.150.200"
+    ]
+  },
+  "source": {
+    "address": "177.54.150.200",
+    "geo": {
+      "city_name": "São Paulo",
+      "country_iso_code": "BR",
+      "country_name": "Brazil",
+      "location": {
+        "lat": -23.5505,
+        "lon": -46.6333
+      }
+    },
+    "ip": "177.54.150.200",
+    "port": 53211
+  },
+  "tags": [
+    "threat:ddos_source",
+    "ioc_match",
+    "category:dns"
+  ],
+  "threat": {
+    "indicator": {
+      "confidence": 0.8,
+      "name": "177.54.150.200",
+      "type": "ip"
+    }
+  },
+  "ulpf": {
+    "category": "dns",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "28a7343d2d0ba5944d56f37b2a4fe9d2dceb277cc972c93abb6dfed02e6d6d33"
+    },
+    "metadata": {
+      "detection_confidence": 0.97,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "json",
+      "parser_name": "JSON Parser",
+      "parser_version": "1.1.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "28a7343d2d0ba5944d56f37b2a4fe9d2dceb277cc972c93abb6dfed02e6d6d33",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "alert.severity": 1,
+      "alert.signature": "ET MALWARE DNS Query to C2 Domain",
+      "dest_ip": "10.0.0.5",
+      "dest_port": 53,
+      "event_type": "alert",
+      "proto": "UDP",
+      "src_ip": "177.54.150.200",
+      "src_port": 53211,
+      "timestamp": "2026-10-21T10:00:04Z"
+    },
+    "raw_format": "json",
+    "severity_label": "info",
+    "threat_category": "DDoS Source",
+    "timestamp_original": "2026-10-21T10:00:04Z"
+  }
+}

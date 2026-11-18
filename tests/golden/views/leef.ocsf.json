@@ -1,0 +1,200 @@
+{
+  "action": "Unknown",
+  "action_id": 0,
+  "activity_id": 6,
+  "activity_name": "Traffic",
+  "category_name": "Network Activity",
+  "category_uid": 4,
+  "class_name": "Network Activity",
+  "class_uid": 4001,
+  "dst_endpoint": {
+    "ip": "10.0.1.99",
+    "location": {
+      "city": "Internal",
+      "country": "XX"
+    }
+  },
+  "firewall_rule": {
+    "uid": "SecurityAlert"
+  },
+  "message": "Brute force threshold exceeded",
+  "metadata": {
+    "labels": [
+      "high_severity",
+      "category:network"
+    ],
+    "log_name": "leef",
+    "logged_time": 1792576800000,
+    "original_time": "2026-10-21T10:00:00Z",
+    "product": {
+      "name": "QRadar",
+      "vendor_name": "IBM",
+      "version": "7.5"
+    },
+    "profiles": [
+      "security_control"
+    ],
+    "uid": "00000000-0000-8000-8000-000000000004",
+    "version": "1.3.0"
+  },
+  "observables": [
+    {
+      "name": "src_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "185.220.101.33"
+    },
+    {
+      "name": "dst_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "10.0.1.99"
+    }
+  ],
+  "raw_data": "LEEF:2.0|IBM|QRadar|7.5|SecurityAlert|devTime=2026-10-21T10:00:00Z\tsrc=185.220.101.33\tdst=10.0.1.99\tusrName=jdoe\tsev=7\tmsg=Brute force threshold exceeded",
+  "severity": "High",
+  "severity_id": 4,
+  "src_endpoint": {
+    "ip": "185.220.101.33",
+    "location": {
+      "city": "Frankfurt am Main",
+      "country": "DE",
+      "lat": 50.1155,
+      "long": 8.6842
+    }
+  },
+  "time": 1792576800000,
+  "type_name": "Network Activity: Traffic",
+  "type_uid": 400106,
+  "unmapped": {
+    "x_ibm": {
+      "event_id": "SecurityAlert",
+      "leef_version": "2.0",
+      "message": "Brute force threshold exceeded",
+      "severity": "7",
+      "timestamp": "2026-10-21T10:00:00Z"
+    },
+    "x_ulpf": {
+      "event": {
+        "action": "other",
+        "category": "network",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": "10.0.1.99",
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "device": {
+          "hostname": null,
+          "ip": null,
+          "product": "QRadar",
+          "serial": null,
+          "type": null,
+          "vendor": "IBM",
+          "version": "7.5"
+        },
+        "event_type": "leef_SecurityAlert",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "69880c73efc9646cb4a92a9fe356a5dceac5b1a906e42e41adafd8e67faf15a6"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": "Internal",
+          "dst_country": "Private",
+          "dst_country_code": "XX",
+          "dst_latitude": null,
+          "dst_longitude": null,
+          "src_city": "Frankfurt am Main",
+          "src_country": "Germany",
+          "src_country_code": "DE",
+          "src_latitude": 50.1155,
+          "src_longitude": 8.6842
+        },
+        "metadata": {
+          "detection_confidence": 0.98,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "leef",
+          "parser_name": "LEEF Parser",
+          "parser_version": "1.1.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "69880c73efc9646cb4a92a9fe356a5dceac5b1a906e42e41adafd8e67faf15a6",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": null,
+          "protocol_number": null,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_format": "leef",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": "SecurityAlert",
+          "name": null
+        },
+        "severity": 7,
+        "severity_label": "high",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "185.220.101.33",
+          "mac": null,
+          "port": null,
+          "zone": null
+        },
+        "tags": [
+          "high_severity",
+          "category:network"
+        ],
+        "threat": {
+          "category": null,
+          "confidence": null,
+          "cve": [],
+          "ioc_type": null,
+          "ioc_value": null,
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-21T10:00:00+00:00",
+        "timestamp_original": "2026-10-21T10:00:00Z",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": "jdoe",
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "_comment": "Fallback prefix table covering only the IPs in the bundled demo data sets; locations are approximate. For real deployments place a MaxMind-format database (GeoLite2-City.mmdb, GeoIP2, or DB-IP Lite) in config/geoip/, <data dir>/geoip/ or $ULPF_GEOIP_DIR: it takes precedence over this table. Private, CGNAT, documentation and other special-purpose ranges are labelled by the enricher and never geolocated.",
+  "_version": "1.1.0",
+
+  "45.33.32.": {
+    "country": "United States",
+    "cc": "US",
+    "city": "Fremont",
+    "region": "California",
+    "lat": 37.5485,
+    "lon": -121.9886,
+    "asn": "AS63949",
+    "asn_name": "Linode LLC",
+    "type": "hosting"
+  },
+  "185.220.101.": {
+    "country": "Germany",
+    "cc": "DE",
+    "city": "Frankfurt am Main",
+    "region": "Hesse",
+    "lat": 50.1155,
+    "lon": 8.6842,
+    "asn": "AS205100",
+    "asn_name": "F3 Netze e.V.",
+    "type": "tor_exit"
+  },
+  "103.224.182.": {
+    "country": "China",
+    "cc": "CN",
+    "city": "Beijing",
+    "region": "Beijing",
+    "lat": 39.9042,
+    "lon": 116.4074,
+    "asn": "AS138915",
+    "asn_name": "Kaopu Cloud HK Limited",
+    "type": "hosting"
+  },
+  "91.121.87.": {
+    "country": "France",
+    "cc": "FR",
+    "city": "Roubaix",
+    "region": "Hauts-de-France",
+    "lat": 50.6942,
+    "lon": 3.1746,
+    "asn": "AS16276",
+    "asn_name": "OVH SAS",
+    "type": "hosting"
+  },
+  "177.54.150.": {
+    "country": "Brazil",
+    "cc": "BR",
+    "city": "São Paulo",
+    "region": "São Paulo",
+    "lat": -23.5505,
+    "lon": -46.6333,
+    "asn": "AS26615",
+    "asn_name": "Tim Celular S.A.",
+    "type": "isp"
+  },
+  "185.220.101.2": {
+    "country": "Germany",
+    "cc": "DE",
+    "city": "Frankfurt am Main",
+    "region": "Hesse",
+    "lat": 50.1155,
+    "lon": 8.6842,
+    "asn": "AS205100",
+    "asn_name": "F3 Netze e.V.",
+    "type": "tor_exit"
+  },
+  "156.234.10.": {
+    "country": "South Korea",
+    "cc": "KR",
+    "city": "Seoul",
+    "region": "Seoul",
+    "lat": 37.5665,
+    "lon": 126.9780,
+    "asn": "AS4766",
+    "asn_name": "Korea Telecom",
+    "type": "isp"
+  }
+}

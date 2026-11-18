@@ -1,0 +1,72 @@
+{
+  "target": "legacy",
+  "proto": "udp",
+  "workers": 3,
+  "offered_rate": 15000.0,
+  "events": 100000,
+  "sent": 100000,
+  "send_seconds": 6.67,
+  "send_rate": 14991.9,
+  "received": 100000,
+  "queue_dropped": 0,
+  "parsed": 100000,
+  "failed": 0,
+  "persisted": 100000,
+  "loss": {
+    "network": 0,
+    "queue": 0,
+    "processing": 0,
+    "storage": 0,
+    "total": 0
+  },
+  "persisted_eps": 12848.5,
+  "drain_lag_seconds": 1.113,
+  "first_persist_seconds": 0.516,
+  "series": [
+    [
+      0.266,
+      0
+    ],
+    [
+      1.267,
+      7936
+    ],
+    [
+      2.272,
+      23296
+    ],
+    [
+      3.273,
+      38400
+    ],
+    [
+      4.275,
+      53248
+    ],
+    [
+      5.278,
+      68352
+    ],
+    [
+      6.28,
+      83200
+    ],
+    [
+      7.282,
+      98304
+    ]
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}

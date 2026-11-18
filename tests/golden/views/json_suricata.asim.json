@@ -1,0 +1,163 @@
+{
+  "AdditionalFields": {
+    "x_ulpf": {
+      "event": {
+        "action": "other",
+        "category": "dns",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": "10.0.0.5",
+          "mac": null,
+          "port": 53,
+          "zone": null
+        },
+        "device": {
+          "hostname": null,
+          "ip": null,
+          "product": "JSON Source",
+          "serial": null,
+          "type": null,
+          "vendor": "Unknown",
+          "version": null
+        },
+        "event_type": "alert",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "28a7343d2d0ba5944d56f37b2a4fe9d2dceb277cc972c93abb6dfed02e6d6d33"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": "Internal",
+          "dst_country": "Private",
+          "dst_country_code": "XX",
+          "dst_latitude": null,
+          "dst_longitude": null,
+          "src_city": "São Paulo",
+          "src_country": "Brazil",
+          "src_country_code": "BR",
+          "src_latitude": -23.5505,
+          "src_longitude": -46.6333
+        },
+        "metadata": {
+          "detection_confidence": 0.97,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "json",
+          "parser_name": "JSON Parser",
+          "parser_version": "1.1.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "28a7343d2d0ba5944d56f37b2a4fe9d2dceb277cc972c93abb6dfed02e6d6d33",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": "UDP",
+          "protocol_number": 17,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_event": "{\"timestamp\":\"2026-10-21T10:00:04Z\",\"event_type\":\"alert\",\"src_ip\":\"177.54.150.200\",\"src_port\":53211,\"dest_ip\":\"10.0.0.5\",\"dest_port\":53,\"proto\":\"UDP\",\"alert\":{\"signature\":\"ET MALWARE DNS Query to C2 Domain\",\"severity\":1}}",
+        "raw_format": "json",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": null,
+          "name": null
+        },
+        "severity": 1,
+        "severity_label": "info",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "177.54.150.200",
+          "mac": null,
+          "port": 53211,
+          "zone": null
+        },
+        "tags": [
+          "threat:ddos_source",
+          "ioc_match",
+          "category:dns"
+        ],
+        "threat": {
+          "category": "DDoS Source",
+          "confidence": 0.8,
+          "cve": [],
+          "ioc_type": "ip",
+          "ioc_value": "177.54.150.200",
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-21T10:00:04+00:00",
+        "timestamp_original": "2026-10-21T10:00:04Z",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": null,
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    },
+    "x_unknown": {
+      "alert.severity": 1,
+      "alert.signature": "ET MALWARE DNS Query to C2 Domain",
+      "event_type": "alert",
+      "timestamp": "2026-10-21T10:00:04Z"
+    }
+  },
+  "DstGeoCity": "Internal",
+  "DstGeoCountry": "Private",
+  "DstIpAddr": "10.0.0.5",
+  "DstPortNumber": 53,
+  "Dvc": "",
+  "EventCount": 1,
+  "EventEndTime": "2026-10-21T10:00:04.000000Z",
+  "EventOriginalSeverity": "1",
+  "EventOriginalType": "alert",
+  "EventProduct": "JSON Source",
+  "EventResult": "NA",
+  "EventSchema": "NetworkSession",
+  "EventSchemaVersion": "1.0.0",
+  "EventSeverity": "Informational",
+  "EventStartTime": "2026-10-21T10:00:04.000000Z",
+  "EventType": "NetworkSession",
+  "EventUid": "00000000-0000-8000-8000-000000000013",
+  "EventVendor": "Unknown",
+  "NetworkProtocol": "UDP",
+  "SrcGeoCity": "São Paulo",
+  "SrcGeoCountry": "Brazil",
+  "SrcGeoLatitude": -23.5505,
+  "SrcGeoLongitude": -46.6333,
+  "SrcIpAddr": "177.54.150.200",
+  "SrcPortNumber": 53211,
+  "ThreatCategory": "DDoS Source",
+  "ThreatConfidence": 80,
+  "ThreatIpAddr": "177.54.150.200",
+  "TimeGenerated": "2026-10-21T10:00:04.000000Z"
+}

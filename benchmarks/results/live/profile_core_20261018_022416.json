@@ -1,0 +1,235 @@
+{
+  "events": 50000,
+  "events_per_second_single_core": 12644.5,
+  "us_per_event": 79.09,
+  "per_format_us": {
+    "cef": {
+      "count": 5646,
+      "mean_us": 81.8
+    },
+    "csv": {
+      "count": 5501,
+      "mean_us": 58.0
+    },
+    "json": {
+      "count": 5669,
+      "mean_us": 83.7
+    },
+    "kv": {
+      "count": 5498,
+      "mean_us": 84.1
+    },
+    "leef": {
+      "count": 5642,
+      "mean_us": 60.5
+    },
+    "syslog": {
+      "count": 10974,
+      "mean_us": 72.5
+    },
+    "w3c": {
+      "count": 5542,
+      "mean_us": 57.5
+    },
+    "xml": {
+      "count": 5528,
+      "mean_us": 138.2
+    }
+  },
+  "profiled_total_own_s": 8.537,
+  "top_functions": [
+    {
+      "function": "normalizer.py:404:apply_field_mappings",
+      "calls": 50000,
+      "own_s": 0.5366,
+      "cumulative_s": 0.6248
+    },
+    {
+      "function": "enricher.py:90:enrich_event",
+      "calls": 50000,
+      "own_s": 0.5237,
+      "cumulative_s": 0.6621
+    },
+    {
+      "function": "pipeline.py:102:process_line",
+      "calls": 50000,
+      "own_s": 0.4398,
+      "cumulative_s": 8.5365
+    },
+    {
+      "function": "schema.py:154:new_unified_event",
+      "calls": 50000,
+      "own_s": 0.3786,
+      "cumulative_s": 0.9359
+    },
+    {
+      "function": "normalizer.py:441:build_normalized_event",
+      "calls": 50000,
+      "own_s": 0.3633,
+      "cumulative_s": 2.8207
+    },
+    {
+      "function": "~:0:<built-in method _hashlib.openssl_sha256>",
+      "calls": 50000,
+      "own_s": 0.3104,
+      "cumulative_s": 0.3104
+    },
+    {
+      "function": "xml_parser.py:122:_find_tag",
+      "calls": 44224,
+      "own_s": 0.2991,
+      "cumulative_s": 0.4275
+    },
+    {
+      "function": "detector.py:61:detect_format",
+      "calls": 50000,
+      "own_s": 0.2327,
+      "cumulative_s": 0.3472
+    },
+    {
+      "function": "~:0:<method 'findall' of 're.Pattern' objects>",
+      "calls": 38420,
+      "own_s": 0.2152,
+      "cumulative_s": 0.2152
+    },
+    {
+      "function": "~:0:<method 'get' of 'dict' objects>",
+      "calls": 1212392,
+      "own_s": 0.2035,
+      "cumulative_s": 0.2035
+    },
+    {
+      "function": "pipeline.py:276:_update_metrics",
+      "calls": 50000,
+      "own_s": 0.1938,
+      "cumulative_s": 0.2317
+    },
+    {
+      "function": "leef_parser.py:53:parse",
+      "calls": 5642,
+      "own_s": 0.1523,
+      "cumulative_s": 0.6038
+    },
+    {
+      "function": "~:0:<method 'lower' of 'str' objects>",
+      "calls": 793962,
+      "own_s": 0.1515,
+      "cumulative_s": 0.1515
+    },
+    {
+      "function": "schema.py:46:new_uuid",
+      "calls": 50000,
+      "own_s": 0.1468,
+      "cumulative_s": 0.1939
+    },
+    {
+      "function": "~:0:<method 'isoformat' of 'datetime.datetime' objects>",
+      "calls": 30308,
+      "own_s": 0.1275,
+      "cumulative_s": 0.1275
+    },
+    {
+      "function": "xml_parser.py:30:parse",
+      "calls": 5528,
+      "own_s": 0.1225,
+      "cumulative_s": 1.4475
+    },
+    {
+      "function": "xml_parser.py:94:_extract",
+      "calls": 33168,
+      "own_s": 0.1212,
+      "cumulative_s": 0.1785
+    },
+    {
+      "function": "normalizer.py:196:_parse_ts",
+      "calls": 29031,
+      "own_s": 0.1199,
+      "cumulative_s": 0.3291
+    },
+    {
+      "function": "normalizer.py:270:normalize_severity",
+      "calls": 50000,
+      "own_s": 0.1195,
+      "cumulative_s": 0.2387
+    },
+    {
+      "function": "cef_parser.py:87:parse",
+      "calls": 5646,
+      "own_s": 0.1177,
+      "cumulative_s": 0.7749
+    },
+    {
+      "function": "~:0:<built-in method builtins.any>",
+      "calls": 91717,
+      "own_s": 0.109,
+      "cumulative_s": 0.2649
+    },
+    {
+      "function": "syslog_parser.py:102:_build",
+      "calls": 10974,
+      "own_s": 0.1069,
+      "cumulative_s": 0.328
+    },
+    {
+      "function": "schema.py:29:_utc_now_iso",
+      "calls": 66789,
+      "own_s": 0.1069,
+      "cumulative_s": 0.1364
+    },
+    {
+      "function": "~:0:<method 'strip' of 'str' objects>",
+      "calls": 699925,
+      "own_s": 0.1046,
+      "cumulative_s": 0.1046
+    },
+    {
+      "function": "~:0:<method 'match' of 're.Pattern' objects>",
+      "calls": 73310,
+      "own_s": 0.0998,
+      "cumulative_s": 0.0998
+    },
+    {
+      "function": "~:0:<method 'split' of 'str' objects>",
+      "calls": 348520,
+      "own_s": 0.0989,
+      "cumulative_s": 0.0989
+    },
+    {
+      "function": "normalizer.py:249:normalize_timestamp",
+      "calls": 50000,
+      "own_s": 0.0949,
+      "cumulative_s": 0.4552
+    },
+    {
+      "function": "w3c_parser.py:91:parse",
+      "calls": 5542,
+      "own_s": 0.0908,
+      "cumulative_s": 0.4521
+    },
+    {
+      "function": "kv_parser.py:24:parse",
+      "calls": 5498,
+      "own_s": 0.09,
+      "cumulative_s": 0.6202
+    },
+    {
+      "function": "ElementTree.py:1337:XML",
+      "calls": 5528,
+      "own_s": 0.0864,
+      "cumulative_s": 0.1659
+    }
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}

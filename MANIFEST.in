@@ -1,0 +1,18 @@
+include README.md LICENSE CHANGELOG.md pyproject.toml requirements.txt
+recursive-include ulpf/gui/resources *
+recursive-include ulpf/engine/schema_registry *.json
+include ulpf/plugin/manifest.json
+recursive-include ulpf/intelligence/sigma_rules *.yml
+
+prune benchmarks
+prune tests
+prune native
+prune docs
+prune build
+prune python311
+prune incubation_pack
+prune .hypothesis
+global-exclude __pycache__ *.py[cod] *.pyd *.so *.dylib *.duckdb *.duckdb.wal *.parquet *.ulj *.key *.pem
+recursive-include ulpf/console/static *
+recursive-include ulpf/runtime/ebpf *.c
+recursive-include ulpf/soar/playbooks *.yaml

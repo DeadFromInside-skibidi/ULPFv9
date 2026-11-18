@@ -1,0 +1,16 @@
+CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Drop|Firewall Rule Drop|8|rt=2024-08-28 10:15:01 src=45.33.32.156 dst=10.0.1.50 spt=12345 dpt=4444 proto=TCP act=drop msg=Suspicious port connection blocked
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User admin logged in from 172.16.0.4
+LEEF:1.0|Snort|Snort IDS|3.1|1000001|devTime=2024-08-28 10:15:01	cat=attempted-recon	src=45.33.32.156	dst=192.168.1.10	srcPort=54321	dstPort=80	proto=TCP	sev=5	msg=SCAN nmap -sS detected
+<134>Aug 28 10:15:01 core-rtr-01 %SYS-5-CONFIG_I: Configured from console by admin on vty0 (192.168.1.100)
+{"timestamp":"2024-08-28T10:15:01Z","source":"ModSecurity","severity":"high","source_ip":"185.220.101.1","destination_ip":"10.0.1.50","action": "block","message":"XSS attack detected"}
+DEBUG: 2024-08-28 10:15:30 - Process 1610 allocated 441442 bytes of memory
+date=2024-08-28 time=10:15:05 devname="FGT-EDGE-01" devid="FG100F1234567890" type="traffic" subtype="forward" level="notice" srcip=192.168.1.100 srcport=52341 dstip=203.0.113.50 dstport=443 proto=6 action="accept" policyid=5 sentbyte=1500 rcvdbyte=35000
+<DNSEvent><Timestamp>2024-08-28T10:15:01Z</Timestamp><SourceIP>192.168.1.100</SourceIP><DestIP>10.0.0.1</DestIP><Domain>evil-c2-server.xyz</Domain><Severity>high</Severity></DNSEvent>
+2024-08-28 10:15:01 192.168.1.100 GET http://www.example.com/index.html 200 15234 Mozilla/5.0 - 203.0.113.50 80 120
+LEEF:1.0|Suricata|Suricata IDS|7.0|2100498|devTime=2024-08-28 10:15:01	cat=web-application-attack	src=185.220.101.1	dst=10.0.1.50	srcPort=49000	dstPort=443	proto=TCP	sev=8	msg=ET EXPLOIT Possible SQL Injection
+[2024-08-28 10:15:30] [CUSTOM] [ERR] Connection refused to database at 172.16.0.4:38350
+<131>Aug 28 10:15:30 edge-fw-01 %SEC-6-IPACCESSLOGP: list OUTSIDE-IN blocked tcp 91.121.87.10(53) -> 10.0.0.1(53), 100 packets
+CEF:0|Palo Alto Networks|PAN-OS|11.0|threat|Vulnerability|10|rt=2024-08-28 10:15:30 src=91.121.87.10 dst=10.0.1.25 spt=443 dpt=8443 proto=TCP act=allow-both cat=critical msg=Critical RCE vulnerability exploit attempt
+date=2024-08-28 time=10:15:20 devname="FGT-EDGE-01" type="utm" subtype="virus" level="alert" srcip=103.224.182.250 srcport=80 dstip=192.168.5.100 dstport=52000 proto=6 action="blocked" severity="high" virus="W32/Malware.ABC"
+Transaction 8763 initiated by jdoe on 2024-08-28 10:15:30 with status: allow
+{"timestamp":"2024-08-28T10:15:25Z","source":"AWS WAF","severity":"critical","source_ip":"103.224.182.250","destination_ip":"10.0.1.50","action": "allow","message":"SQL injection blocked"}

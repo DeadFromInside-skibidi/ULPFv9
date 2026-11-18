@@ -1,0 +1,221 @@
+{
+  "action": "Denied",
+  "action_id": 2,
+  "activity_id": 5,
+  "activity_name": "Refuse",
+  "category_name": "Network Activity",
+  "category_uid": 4,
+  "class_name": "Network Activity",
+  "class_uid": 4001,
+  "connection_info": {
+    "direction": "Unknown",
+    "direction_id": 0,
+    "protocol_name": "tcp",
+    "protocol_num": 6
+  },
+  "disposition": "Dropped",
+  "disposition_id": 6,
+  "dst_endpoint": {
+    "ip": "10.0.1.50",
+    "location": {
+      "city": "Internal",
+      "country": "XX"
+    },
+    "port": 4444
+  },
+  "firewall_rule": {
+    "name": "Firewall Rule Drop",
+    "uid": "Drop"
+  },
+  "message": "Firewall Rule Drop",
+  "metadata": {
+    "labels": [
+      "threat:scanner",
+      "ioc_match",
+      "high_severity",
+      "blocked_traffic",
+      "suspicious_port:4444",
+      "category:firewall"
+    ],
+    "log_name": "cef",
+    "logged_time": 1792576800000,
+    "original_time": "2026-10-21T10:00:01Z",
+    "product": {
+      "name": "VPN-1 & FireWall-1",
+      "vendor_name": "Check Point",
+      "version": "R81.20"
+    },
+    "profiles": [
+      "security_control"
+    ],
+    "uid": "00000000-0000-8000-8000-000000000003",
+    "version": "1.3.0"
+  },
+  "observables": [
+    {
+      "name": "src_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "45.33.32.156"
+    },
+    {
+      "name": "dst_endpoint.ip",
+      "type": "IP Address",
+      "type_id": 2,
+      "value": "10.0.1.50"
+    }
+  ],
+  "raw_data": "CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Drop|Firewall Rule Drop|8|rt=2026-10-21T10:00:01Z src=45.33.32.156 dst=10.0.1.50 spt=12345 dpt=4444 proto=TCP act=Drop",
+  "severity": "High",
+  "severity_id": 4,
+  "src_endpoint": {
+    "ip": "45.33.32.156",
+    "location": {
+      "city": "Fremont",
+      "country": "US",
+      "lat": 37.5485,
+      "long": -121.9886
+    },
+    "port": 12345
+  },
+  "status": "Failure",
+  "status_id": 2,
+  "time": 1792576801000,
+  "type_name": "Network Activity: Refuse",
+  "type_uid": 400105,
+  "unmapped": {
+    "x_check_point": {
+      "act": "Drop",
+      "cef_version": "0",
+      "event_name": "Firewall Rule Drop",
+      "rt": "2026-10-21T10:00:01Z",
+      "signature_id": "Drop"
+    },
+    "x_ulpf": {
+      "event": {
+        "action": "dropped",
+        "category": "firewall",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": "10.0.1.50",
+          "mac": null,
+          "port": 4444,
+          "zone": null
+        },
+        "device": {
+          "hostname": null,
+          "ip": null,
+          "product": "VPN-1 & FireWall-1",
+          "serial": null,
+          "type": null,
+          "vendor": "Check Point",
+          "version": "R81.20"
+        },
+        "event_type": "cef_Drop",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "bf1545ff5b66df5d589df3bc98f63108535f60c0291511e896cbcff6d9a96ca5"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": "Internal",
+          "dst_country": "Private",
+          "dst_country_code": "XX",
+          "dst_latitude": null,
+          "dst_longitude": null,
+          "src_city": "Fremont",
+          "src_country": "United States",
+          "src_country_code": "US",
+          "src_latitude": 37.5485,
+          "src_longitude": -121.9886
+        },
+        "metadata": {
+          "detection_confidence": 0.98,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "cef",
+          "parser_name": "CEF Parser",
+          "parser_version": "1.2.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "bf1545ff5b66df5d589df3bc98f63108535f60c0291511e896cbcff6d9a96ca5",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": "TCP",
+          "protocol_number": 6,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_format": "cef",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": "Drop",
+          "name": "Firewall Rule Drop"
+        },
+        "severity": 8,
+        "severity_label": "high",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "45.33.32.156",
+          "mac": null,
+          "port": 12345,
+          "zone": null
+        },
+        "tags": [
+          "threat:scanner",
+          "ioc_match",
+          "high_severity",
+          "blocked_traffic",
+          "suspicious_port:4444",
+          "category:firewall"
+        ],
+        "threat": {
+          "category": "Scanner",
+          "confidence": 0.95,
+          "cve": [],
+          "ioc_type": "ip",
+          "ioc_value": "45.33.32.156",
+          "signature": "Firewall Rule Drop",
+          "signature_id": "Drop"
+        },
+        "timestamp": "2026-10-21T10:00:01+00:00",
+        "timestamp_original": "2026-10-21T10:00:01Z",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": null,
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    }
+  }
+}

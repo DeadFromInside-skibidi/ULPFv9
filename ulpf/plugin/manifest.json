@@ -1,0 +1,32 @@
+{
+  "id": "ulpf",
+  "name": "Universal Log Pre-processing Framework",
+  "version": "9.0.0",
+  "api_version": "1",
+  "type": "log-processing",
+  "entrypoint": "ulpf.plugin:ULPFPlugin",
+  "capabilities": [
+    "log-ingestion",
+    "format-detection",
+    "normalization",
+    "enrichment",
+    "anomaly-detection",
+    "correlation",
+    "forensics",
+    "auto-parser",
+    "log-dna"
+  ],
+  "supported_formats": [
+    "syslog_rfc3164",
+    "syslog_rfc5424",
+    "cef",
+    "leef",
+    "json",
+    "xml",
+    "csv",
+    "kv",
+    "w3c"
+  ],
+  "offline": true,
+  "python_min_version": "3.10"
+}

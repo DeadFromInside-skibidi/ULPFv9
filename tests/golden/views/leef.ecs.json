@@ -1,0 +1,101 @@
+{
+  "@timestamp": "2026-10-21T10:00:00+00:00",
+  "destination": {
+    "address": "10.0.1.99",
+    "geo": {
+      "city_name": "Internal",
+      "country_iso_code": "XX",
+      "country_name": "Private"
+    },
+    "ip": "10.0.1.99"
+  },
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "other",
+    "category": [
+      "network"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "leef",
+    "hash": "69880c73efc9646cb4a92a9fe356a5dceac5b1a906e42e41adafd8e67faf15a6",
+    "id": "00000000-0000-8000-8000-000000000004",
+    "kind": "event",
+    "original": "LEEF:2.0|IBM|QRadar|7.5|SecurityAlert|devTime=2026-10-21T10:00:00Z\tsrc=185.220.101.33\tdst=10.0.1.99\tusrName=jdoe\tsev=7\tmsg=Brute force threshold exceeded",
+    "outcome": "unknown",
+    "severity": 7,
+    "type": [
+      "leef_SecurityAlert"
+    ]
+  },
+  "message": "Brute force threshold exceeded",
+  "observer": {
+    "product": "QRadar",
+    "vendor": "IBM",
+    "version": "7.5"
+  },
+  "related": {
+    "ip": [
+      "10.0.1.99",
+      "185.220.101.33"
+    ],
+    "user": [
+      "jdoe"
+    ]
+  },
+  "rule": {
+    "id": "SecurityAlert"
+  },
+  "source": {
+    "address": "185.220.101.33",
+    "geo": {
+      "city_name": "Frankfurt am Main",
+      "country_iso_code": "DE",
+      "country_name": "Germany",
+      "location": {
+        "lat": 50.1155,
+        "lon": 8.6842
+      }
+    },
+    "ip": "185.220.101.33"
+  },
+  "tags": [
+    "high_severity",
+    "category:network"
+  ],
+  "ulpf": {
+    "category": "network",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "69880c73efc9646cb4a92a9fe356a5dceac5b1a906e42e41adafd8e67faf15a6"
+    },
+    "metadata": {
+      "detection_confidence": 0.98,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "leef",
+      "parser_name": "LEEF Parser",
+      "parser_version": "1.1.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "69880c73efc9646cb4a92a9fe356a5dceac5b1a906e42e41adafd8e67faf15a6",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "dst_ip": "10.0.1.99",
+      "event_id": "SecurityAlert",
+      "leef_version": "2.0",
+      "message": "Brute force threshold exceeded",
+      "severity": "7",
+      "src_ip": "185.220.101.33",
+      "timestamp": "2026-10-21T10:00:00Z",
+      "user": "jdoe"
+    },
+    "raw_format": "leef",
+    "severity_label": "high",
+    "timestamp_original": "2026-10-21T10:00:00Z"
+  },
+  "user": {
+    "name": "jdoe"
+  }
+}

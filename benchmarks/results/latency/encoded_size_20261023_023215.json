@@ -1,0 +1,43 @@
+{
+  "events": 20000,
+  "raw_bytes_per_event": 183.1,
+  "unified": {
+    "bytes_per_event": 2609.3,
+    "vs_raw": 14.25
+  },
+  "ecs": {
+    "bytes_per_event": 1925.0,
+    "vs_raw": 10.51
+  },
+  "ocsf": {
+    "bytes_per_event": 1669.2,
+    "vs_raw": 9.12
+  },
+  "cef": {
+    "bytes_per_event": 466.2,
+    "vs_raw": 2.55
+  },
+  "leef": {
+    "bytes_per_event": 449.5,
+    "vs_raw": 2.46
+  },
+  "rfc5424": {
+    "bytes_per_event": 2862.4,
+    "vs_raw": 15.63
+  },
+  "severity_gte_7_share_pct": 38.8,
+  "corpus": "synthetic 9-format mix, first 20,000 lines of build_corpus(200000, 42)",
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}

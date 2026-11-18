@@ -1,0 +1,10 @@
+id: notify-soc
+name: Record a SOC notification on the case
+version: 1
+description: Sub-playbook used by containment playbooks; replace or extend with a mail / chat connector.
+inputs:
+  message: {required: true}
+steps:
+  - id: note
+    action: case.note
+    with: {text: "SOC notification: {{ inputs.message }}"}

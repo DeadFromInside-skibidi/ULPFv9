@@ -1,0 +1,73 @@
+# Bundled Windows interpreter (local runtime only; hundreds of MB)
+python311/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+*.spec
+!packaging/*.spec
+.venv/
+venv/
+env/
+
+# Test / coverage / lint caches
+.pytest_cache/
+.hypothesis/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ULPF runtime state (lives in ULPF_DATA_DIR; never in the source tree)
+output/
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.parquet
+spool/
+evidence/
+learned_parsers/
+log_dna_db.json
+parser_signing.key
+parser_signing.pem
+evidence*.pem
+evidence.pub
+row_key.k0
+*.ulj
+
+# Generated benchmark and test output (result JSON files are kept: docs cite them)
+benchmarks/results/**/corpus_*.log
+benchmarks/results/**/*.png
+benchmarks/results/**/*.zip
+benchmarks/*.zip
+
+# Compiled core (build with scripts/build_native.ps1 or .sh)
+native/ulpf_core/target/
+ulpf/ulpf_core*.pyd
+ulpf/ulpf_core*.so
+ulpf/ulpf_core*.dylib
+tests/live_output/*
+!tests/live_output/.gitkeep
+listener_output.log
+ulpf-offline-pkg/
+ulpf-plugin-offline.tar.gz
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# v10
+native/ulpf_forensic/target/
+raft-long*/
+compliance-evidence.zip
+fleet-agent/
+tests/live_output/*.zip
+*.gguf
+*.onnx

@@ -1,0 +1,46 @@
+{
+ "events": 300000,
+ "encrypted": true,
+ "target_eps": 28935,
+ "worker_encode_eps": 26787,
+ "hot_append_eps": 48281,
+ "flush_eps": 52230,
+ "ingest_host_eps": 25089,
+ "files_before_compaction": 38,
+ "bytes_before_compaction": 38999418,
+ "peak_rss_mb_ingest": 365.6,
+ "compaction_eps": 93541,
+ "files_after_compaction": 8,
+ "file_mb_after": [
+  3.0,
+  4.4,
+  4.4,
+  4.5,
+  4.5
+ ],
+ "peak_rss_mb_compaction": 482.4,
+ "query_count_all": {
+  "rows": 300000,
+  "ms": 69,
+  "files_scanned": 8
+ },
+ "query_ip_lookup": {
+  "rows": 0,
+  "ms": 101,
+  "files_scanned": 0,
+  "files_total": 8
+ },
+ "query_absent_ip": {
+  "rows": 0,
+  "ms": 28,
+  "files_scanned": 0
+ },
+ "query_tenant_30min": {
+  "rows": 0,
+  "ms": 37,
+  "files_scanned": 0
+ },
+ "peak_rss_mb": 482.4,
+ "worker_encode_eps_in_run": 25385,
+ "host_headroom_x": 0.87
+}

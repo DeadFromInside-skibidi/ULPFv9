@@ -1,0 +1,44 @@
+id: disable-compromised-identity
+name: Disable a compromised identity everywhere
+version: 2
+description: Revokes sessions and disables the account in the IdP and on-prem AD in parallel; attaches an AWS deny policy when an IAM user is known.
+inputs:
+  user: {required: true}
+  aws_user: {}
+  idp: {default: entra}
+  directory: {default: corp-ad}
+  aws: {default: aws}
+triggers:
+  techniques: [T1078, T1078.004, T1539, T1550]
+  levels: [critical]
+steps:
+  - id: approval
+    type: approval
+    summary: "Disable identity {{ inputs.user }} in IdP, AD and AWS"
+    approvers: [analyst, admin]
+  - id: idp
+    connector: "{{ inputs.idp }}"
+    action: disable_user
+    needs: [approval]
+    approval: false
+    with: {user: "{{ inputs.user }}"}
+  - id: ad
+    connector: "{{ inputs.directory }}"
+    action: disable_user
+    needs: [approval]
+    approval: false
+    with: {user: "{{ inputs.user }}"}
+    on_failure: continue
+  - id: aws
+    connector: "{{ inputs.aws }}"
+    action: disable_user
+    when: "inputs.aws_user"
+    needs: [approval]
+    approval: false
+    with: {user: "{{ inputs.aws_user }}"}
+    on_failure: continue
+  - id: done
+    action: case.mark_contained
+    needs: [idp, ad, aws]
+    trigger: any_success
+    with: {note: "identity {{ inputs.user }} disabled"}

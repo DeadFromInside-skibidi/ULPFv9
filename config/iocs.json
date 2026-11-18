@@ -1,0 +1,60 @@
+{
+  "_comment": "Bundled Threat Intelligence IOC database for ULPF air-gap deployment.",
+  "_version": "1.0.0",
+  "_note": "Replace with live feeds (MISP, OTX, VirusTotal) via API in connected environments.",
+
+  "45.33.32.156": {
+    "cat": "Scanner",
+    "conf": 0.95,
+    "description": "Known Shodan/masscan scanning node. Mass port scanning and vulnerability probing.",
+    "tags": ["scanner", "port_scan", "shodan"],
+    "first_seen": "2023-01-15",
+    "last_seen": "2024-08-28",
+    "references": ["https://www.shodan.io/host/45.33.32.156"]
+  },
+  "185.220.101.1": {
+    "cat": "Tor Exit Node",
+    "conf": 0.99,
+    "description": "Active Tor exit relay. Traffic from this IP originates anonymously via the Tor network.",
+    "tags": ["tor", "anonymizer", "exit_node"],
+    "first_seen": "2022-06-01",
+    "last_seen": "2024-08-28",
+    "references": ["https://check.torproject.org/"]
+  },
+  "185.220.101.2": {
+    "cat": "Tor Exit Node",
+    "conf": 0.99,
+    "description": "Active Tor exit relay. Known to route attack traffic for threat actors.",
+    "tags": ["tor", "anonymizer", "exit_node"],
+    "first_seen": "2022-06-01",
+    "last_seen": "2024-08-28",
+    "references": ["https://check.torproject.org/"]
+  },
+  "103.224.182.250": {
+    "cat": "C2 Server",
+    "conf": 0.90,
+    "description": "Known command-and-control server. Associated with APT campaigns targeting APAC financial sector.",
+    "tags": ["c2", "apt", "malware", "trojan"],
+    "first_seen": "2023-11-20",
+    "last_seen": "2024-08-28",
+    "references": ["https://abuse.ch/", "https://otx.alienvault.com/"]
+  },
+  "91.121.87.10": {
+    "cat": "Brute Force",
+    "conf": 0.87,
+    "description": "OVH-hosted IP with repeated SSH and RDP brute force activity. Listed in multiple blocklists.",
+    "tags": ["brute_force", "ssh", "rdp", "blocklist"],
+    "first_seen": "2023-05-10",
+    "last_seen": "2024-08-28",
+    "references": ["https://www.abuseipdb.com/check/91.121.87.10"]
+  },
+  "177.54.150.200": {
+    "cat": "DDoS Source",
+    "conf": 0.80,
+    "description": "Brazilian ISP IP associated with botnet C2 callbacks and ICMP flood participation.",
+    "tags": ["ddos", "botnet", "flood"],
+    "first_seen": "2024-01-05",
+    "last_seen": "2024-08-28",
+    "references": ["https://www.abuseipdb.com/check/177.54.150.200"]
+  }
+}

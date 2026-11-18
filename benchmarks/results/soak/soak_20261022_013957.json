@@ -1,0 +1,85 @@
+{
+  "minutes": 1.0,
+  "offered_rate": 3000.0,
+  "proto": "tcp",
+  "workers": 7,
+  "sent": null,
+  "received": 181350,
+  "persisted": 181350,
+  "loss": null,
+  "memory_growth_after_warmup": {
+    "host_mb": 686.6,
+    "workers_mb": 22.6,
+    "host_pct": 300.6,
+    "workers_pct": 5.1
+  },
+  "samples": [
+    {
+      "t": 10.0,
+      "persisted": 28560,
+      "received": 29430,
+      "rss_host_mb": 228.4,
+      "rss_workers_mb": 441.0,
+      "journal_segments": 1,
+      "buffer_segments": 3
+    },
+    {
+      "t": 20.3,
+      "persisted": 59430,
+      "received": 60090,
+      "rss_host_mb": 386.0,
+      "rss_workers_mb": 454.5,
+      "journal_segments": 1,
+      "buffer_segments": 3
+    },
+    {
+      "t": 30.3,
+      "persisted": 89520,
+      "received": 90420,
+      "rss_host_mb": 525.1,
+      "rss_workers_mb": 465.3,
+      "journal_segments": 1,
+      "buffer_segments": 4
+    },
+    {
+      "t": 40.4,
+      "persisted": 119550,
+      "received": 120810,
+      "rss_host_mb": 650.4,
+      "rss_workers_mb": 460.2,
+      "journal_segments": 1,
+      "buffer_segments": 5
+    },
+    {
+      "t": 50.5,
+      "persisted": 149550,
+      "received": 150810,
+      "rss_host_mb": 787.9,
+      "rss_workers_mb": 463.5,
+      "journal_segments": 1,
+      "buffer_segments": 6
+    },
+    {
+      "t": 60.5,
+      "persisted": 179550,
+      "received": 181050,
+      "rss_host_mb": 915.0,
+      "rss_workers_mb": 463.6,
+      "journal_segments": 1,
+      "buffer_segments": 7
+    }
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}

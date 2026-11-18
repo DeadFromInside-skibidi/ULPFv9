@@ -1,0 +1,117 @@
+{
+  "@timestamp": "2026-10-21T10:00:01+00:00",
+  "destination": {
+    "address": "10.0.1.50",
+    "geo": {
+      "city_name": "Internal",
+      "country_iso_code": "XX",
+      "country_name": "Private"
+    },
+    "ip": "10.0.1.50",
+    "port": 4444
+  },
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "dropped",
+    "category": [
+      "network"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "cef",
+    "hash": "bf1545ff5b66df5d589df3bc98f63108535f60c0291511e896cbcff6d9a96ca5",
+    "id": "00000000-0000-8000-8000-000000000003",
+    "kind": "event",
+    "original": "CEF:0|Check Point|VPN-1 & FireWall-1|R81.20|Drop|Firewall Rule Drop|8|rt=2026-10-21T10:00:01Z src=45.33.32.156 dst=10.0.1.50 spt=12345 dpt=4444 proto=TCP act=Drop",
+    "outcome": "failure",
+    "severity": 8,
+    "type": [
+      "cef_Drop"
+    ]
+  },
+  "message": "Firewall Rule Drop",
+  "network": {
+    "iana_number": "6",
+    "transport": "tcp"
+  },
+  "observer": {
+    "product": "VPN-1 & FireWall-1",
+    "vendor": "Check Point",
+    "version": "R81.20"
+  },
+  "related": {
+    "ip": [
+      "10.0.1.50",
+      "45.33.32.156"
+    ]
+  },
+  "rule": {
+    "id": "Drop",
+    "name": "Firewall Rule Drop"
+  },
+  "source": {
+    "address": "45.33.32.156",
+    "geo": {
+      "city_name": "Fremont",
+      "country_iso_code": "US",
+      "country_name": "United States",
+      "location": {
+        "lat": 37.5485,
+        "lon": -121.9886
+      }
+    },
+    "ip": "45.33.32.156",
+    "port": 12345
+  },
+  "tags": [
+    "threat:scanner",
+    "ioc_match",
+    "high_severity",
+    "blocked_traffic",
+    "suspicious_port:4444",
+    "category:firewall"
+  ],
+  "threat": {
+    "indicator": {
+      "confidence": 0.95,
+      "name": "45.33.32.156",
+      "type": "ip"
+    }
+  },
+  "ulpf": {
+    "category": "firewall",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "bf1545ff5b66df5d589df3bc98f63108535f60c0291511e896cbcff6d9a96ca5"
+    },
+    "metadata": {
+      "detection_confidence": 0.98,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "cef",
+      "parser_name": "CEF Parser",
+      "parser_version": "1.2.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "bf1545ff5b66df5d589df3bc98f63108535f60c0291511e896cbcff6d9a96ca5",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "act": "Drop",
+      "cef_version": "0",
+      "dpt": "4444",
+      "dst": "10.0.1.50",
+      "event_name": "Firewall Rule Drop",
+      "proto": "TCP",
+      "rt": "2026-10-21T10:00:01Z",
+      "signature_id": "Drop",
+      "spt": "12345",
+      "src": "45.33.32.156"
+    },
+    "raw_format": "cef",
+    "severity_label": "high",
+    "signature_id": "Drop",
+    "threat_category": "Scanner",
+    "timestamp_original": "2026-10-21T10:00:01Z"
+  }
+}

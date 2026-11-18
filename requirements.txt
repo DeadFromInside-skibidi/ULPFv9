@@ -1,0 +1,25 @@
+# ULPF runtime requirements (Python 3.10+)
+# Core engine, storage and worker pool
+duckdb>=1.0.0
+pyarrow>=14.0.0
+orjson>=3.9.0
+python-dateutil>=2.8.0
+psutil>=5.9.0
+# Pipeline config (YAML) and the v9 runtime: journal encryption, SNMPv3 privacy, cloud tokens
+PyYAML>=6.0
+cryptography>=41.0
+
+# REST API server (`ulpf serve`)
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+python-multipart>=0.0.6
+
+# Terminal dashboard (`ulpf tui`)
+rich>=13.0.0
+textual>=0.40.0
+
+# Native desktop application (`ulpf desktop`) — not needed in containers/servers
+PySide6>=6.5.0
+
+# Benchmark reports / graphs
+matplotlib>=3.7.0

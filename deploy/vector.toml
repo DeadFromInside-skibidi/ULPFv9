@@ -1,0 +1,43 @@
+# Vector (https://vector.dev) as a buffering edge collector in front of ULPF.
+#
+#   devices --syslog/UDP 514--> Vector --TCP, newline-framed, disk-buffered--> ulpf listen :5514
+#
+# Why: UDP has no flow control, so bursts beyond what the receiving host can
+# absorb are dropped by the kernel. Vector receives UDP close to the devices,
+# spools to disk when ULPF is busy or restarting, and delivers over TCP, which
+# ULPF ingests loss-free with backpressure.
+#
+# Check: vector validate deploy/vector.toml   (written against Vector 0.3x option names)
+# Run:   vector --config deploy/vector.toml
+# ULPF:  ulpf listen --protocol tcp --port 5514
+#
+# Raw lines are forwarded unchanged ("text" codec), so ULPF's SHA-256 of each
+# raw event still covers the bytes the device sent.
+
+data_dir = "/var/lib/vector"
+
+[sources.devices_udp]
+type = "socket"
+mode = "udp"
+address = "0.0.0.0:514"          # needs root/CAP_NET_BIND_SERVICE; use 5140 otherwise
+max_length = 102400
+
+[sources.devices_tcp]
+type = "socket"
+mode = "tcp"
+address = "0.0.0.0:514"
+framing.method = "newline_delimited"
+framing.newline_delimited.max_length = 102400
+
+[sinks.ulpf]
+type = "socket"
+inputs = ["devices_udp", "devices_tcp"]
+mode = "tcp"
+address = "ulpf-host:5514"       # host running `ulpf listen`
+encoding.codec = "text"          # forward the original line only
+framing.method = "newline_delimited"
+
+# Survive ULPF restarts and bursts without dropping events
+buffer.type = "disk"
+buffer.max_size = 1073741824     # 1 GiB on disk
+buffer.when_full = "block"       # apply backpressure instead of dropping

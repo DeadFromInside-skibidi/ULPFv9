@@ -1,0 +1,40 @@
+# Pipeline used by the container image (docker compose up).
+# Mount your own file over /app/config/pipeline.docker.yaml to change it.
+mode: industry
+workers: auto
+
+inputs:
+  - type: syslog
+    name: syslog-tcp
+    protocol: tcp
+    host: 0.0.0.0
+    port: 5514
+  - type: syslog
+    name: syslog-udp
+    protocol: udp
+    host: 0.0.0.0
+    port: 5514
+  - type: http            # POST /api/v1/ingest/stream/{source}
+    name: http
+    api_key_env: ULPF_INGEST_KEY
+  - type: otlp            # POST /v1/logs
+    name: otlp
+    api_key_env: ULPF_INGEST_KEY
+
+outputs:
+  - type: duckdb
+    name: store
+
+routes:
+  - name: everything
+    to: [store]
+
+api:
+  enabled: true
+  host: 0.0.0.0           # published by the container; protect with ULPF_API_KEY / api.keys_file
+  port: 8000
+
+# v10 live features (console at http://<host>:8000/console/)
+evidence: {enabled: true}
+soar: {enabled: true, auto_case_levels: [high, critical]}
+copilot: {enabled: true}

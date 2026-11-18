@@ -1,0 +1,56 @@
+{
+  "indicators": 2000000,
+  "events": 100000,
+  "generate_s": 5.03,
+  "snapshot_write_s": 8.91,
+  "snapshot_mb": 136.0,
+  "load_s": 0.85,
+  "matcher": {
+    "indicators": 2000000,
+    "memory_bytes": 265382764,
+    "ip": 804000,
+    "cidr": 40000,
+    "domain": 500000,
+    "domain_wildcard": 60000,
+    "url": 240000,
+    "md5": 100000,
+    "sha1": 0,
+    "sha256": 160000,
+    "email": 80000,
+    "mutex": 8000,
+    "registry": 8000
+  },
+  "load_rss_delta_mb": 486.3,
+  "match_event_ns": {
+    "mixed": {
+      "ns_per_event": 573.0,
+      "hit_rate": 0.0,
+      "avg_line_bytes": 194.3
+    },
+    "url_hash_heavy": {
+      "ns_per_event": 1909.1,
+      "hit_rate": 0.0177,
+      "avg_line_bytes": 323.3
+    }
+  },
+  "lane_overhead_ns": {
+    "mixed": {
+      "native_records": 75038,
+      "off_ns": 24552.0,
+      "overhead_ns_median": -509.9,
+      "overhead_ns_p25_p75": [
+        -860.6,
+        74.8
+      ]
+    },
+    "url_hash_heavy": {
+      "native_records": 100000,
+      "off_ns": 22656.9,
+      "overhead_ns_median": 4117.8,
+      "overhead_ns_p25_p75": [
+        2492.5,
+        4560.3
+      ]
+    }
+  }
+}

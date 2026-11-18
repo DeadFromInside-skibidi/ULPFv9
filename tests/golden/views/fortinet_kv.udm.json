@@ -1,0 +1,196 @@
+{
+  "additional": {
+    "x_fortinet": {
+      "action": "deny",
+      "date": "2026-10-21",
+      "time": "10:00:04",
+      "type": "traffic"
+    },
+    "x_ulpf": {
+      "event": {
+        "action": "denied",
+        "category": "firewall",
+        "correlation_id": null,
+        "destination": {
+          "hostname": null,
+          "interface": null,
+          "ip": "91.121.87.10",
+          "mac": null,
+          "port": 443,
+          "zone": null
+        },
+        "device": {
+          "hostname": "FGT-EDGE-01",
+          "ip": null,
+          "product": "FortiGate",
+          "serial": null,
+          "type": null,
+          "vendor": "Fortinet",
+          "version": null
+        },
+        "event_type": "traffic",
+        "evidence": {
+          "chain_of_custody": [],
+          "raw_hash": "9d3645f041eaee9b6db2f770fe6f087eb293b0efd40260faecdca4e414f135fd"
+        },
+        "extensions": {},
+        "geo": {
+          "dst_city": "Roubaix",
+          "dst_country": "France",
+          "dst_country_code": "FR",
+          "dst_latitude": 50.6942,
+          "dst_longitude": 3.1746,
+          "src_city": "Internal",
+          "src_country": "Private",
+          "src_country_code": "XX",
+          "src_latitude": null,
+          "src_longitude": null
+        },
+        "metadata": {
+          "detection_confidence": 0.85,
+          "ingestion_time": "2026-10-21T10:00:00+00:00",
+          "normalization_version": "1.1.0",
+          "parser_confidence": null,
+          "parser_id": "kv",
+          "parser_name": "Key-Value Parser",
+          "parser_version": "1.0.0",
+          "pipeline_version": "1.1.0",
+          "processing_time_ms": null,
+          "raw_hash_sha256": "9d3645f041eaee9b6db2f770fe6f087eb293b0efd40260faecdca4e414f135fd",
+          "schema_version": "1.1.0",
+          "source_fingerprint": null,
+          "template_id": null
+        },
+        "network": {
+          "application": null,
+          "bytes_in": null,
+          "bytes_out": null,
+          "bytes_total": null,
+          "direction": null,
+          "packets_in": null,
+          "packets_out": null,
+          "protocol": "TCP",
+          "protocol_number": 6,
+          "session_id": null,
+          "vlan_id": null
+        },
+        "raw_event": "date=2026-10-21 time=10:00:04 devname=\"FGT-EDGE-01\" type=\"traffic\" srcip=192.168.1.105 srcport=51234 dstip=91.121.87.10 dstport=443 proto=6 action=\"deny\" user=\"eng01\"",
+        "raw_format": "kv",
+        "related_events": [],
+        "rule": {
+          "action": null,
+          "category": null,
+          "description": null,
+          "id": null,
+          "name": null
+        },
+        "severity": 0,
+        "severity_label": "unknown",
+        "source": {
+          "hostname": null,
+          "interface": null,
+          "ip": "192.168.1.105",
+          "mac": null,
+          "port": 51234,
+          "zone": null
+        },
+        "tags": [
+          "threat:brute_force",
+          "ioc_match",
+          "blocked_traffic",
+          "category:firewall"
+        ],
+        "threat": {
+          "category": "Brute Force",
+          "confidence": 0.87,
+          "cve": [],
+          "ioc_type": "ip",
+          "ioc_value": "91.121.87.10",
+          "signature": null,
+          "signature_id": null
+        },
+        "timestamp": "2026-10-21T10:00:04+00:00",
+        "timestamp_original": "2026-10-21 10:00:04",
+        "user": {
+          "domain": null,
+          "email": null,
+          "group": null,
+          "id": null,
+          "name": "eng01",
+          "source": {
+            "domain": null,
+            "id": null,
+            "name": null
+          },
+          "target": {
+            "domain": null,
+            "id": null,
+            "name": null
+          }
+        }
+      },
+      "v": 1
+    }
+  },
+  "metadata": {
+    "collected_timestamp": "2026-10-21T10:00:00.000000Z",
+    "description": "Traffic session deny",
+    "event_timestamp": "2026-10-21T10:00:04.000000Z",
+    "event_type": "NETWORK_CONNECTION",
+    "log_type": "KV",
+    "product_event_type": "traffic",
+    "product_log_id": "00000000-0000-8000-8000-000000000011",
+    "product_name": "FortiGate",
+    "vendor_name": "Fortinet"
+  },
+  "network": {
+    "ip_protocol": "TCP"
+  },
+  "observer": {
+    "hostname": "FGT-EDGE-01"
+  },
+  "principal": {
+    "ip": [
+      "192.168.1.105"
+    ],
+    "location": {
+      "city": "Internal",
+      "country_or_region": "Private"
+    },
+    "port": 51234,
+    "user": {
+      "userid": "eng01"
+    }
+  },
+  "security_result": [
+    {
+      "about": {
+        "ip": [
+          "91.121.87.10"
+        ]
+      },
+      "action": [
+        "BLOCK"
+      ],
+      "category": [
+        "NETWORK_MALICIOUS"
+      ],
+      "category_details": [
+        "Brute Force"
+      ],
+      "confidence_score": 0.87
+    }
+  ],
+  "target": {
+    "ip": [
+      "91.121.87.10"
+    ],
+    "location": {
+      "city": "Roubaix",
+      "country_or_region": "France",
+      "region_latitude": 50.6942,
+      "region_longitude": 3.1746
+    },
+    "port": 443
+  }
+}

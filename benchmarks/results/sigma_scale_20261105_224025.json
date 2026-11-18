@@ -1,0 +1,51 @@
+{
+ "events": 20000,
+ "sigmahq_rules": 3302,
+ "load_errors": 0,
+ "results": {
+  "mixed_formats": {
+   "none": {
+    "eps": 39673,
+    "native_analytics": true,
+    "vs_none_pct": 0.0
+   },
+   "builtin": {
+    "eps": 27674,
+    "native_analytics": true,
+    "vs_none_pct": -30.2
+   },
+   "sigmahq_1000": {
+    "eps": 14278,
+    "native_analytics": true,
+    "vs_none_pct": -64.0
+   },
+   "sigmahq_all": {
+    "eps": 11500,
+    "native_analytics": true,
+    "vs_none_pct": -71.0
+   }
+  },
+  "sysmon_json": {
+   "none": {
+    "eps": 32043,
+    "native_analytics": true,
+    "vs_none_pct": 0.0
+   },
+   "builtin": {
+    "eps": 32604,
+    "native_analytics": true,
+    "vs_none_pct": 1.8
+   },
+   "sigmahq_1000": {
+    "eps": 14700,
+    "native_analytics": true,
+    "vs_none_pct": -54.1
+   },
+   "sigmahq_all": {
+    "eps": 8128,
+    "native_analytics": true,
+    "vs_none_pct": -74.6
+   }
+  }
+ }
+}

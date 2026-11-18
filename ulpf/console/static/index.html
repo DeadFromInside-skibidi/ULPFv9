@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>ULPF SOC Console</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232563eb'/%3E%3Cpath d='M9 9v9a7 7 0 0 0 14 0V9' stroke='white' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/console/styles.css">
+  <script type="module" src="/console/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="shell">
+    <aside class="nav" aria-label="Primary">
+      <div class="brand"><span class="logo" aria-hidden="true">U</span><span>ULPF <small>SOC Console</small></span></div>
+      <nav>
+        <a href="#/cockpit" data-route="cockpit"><span aria-hidden="true">◉</span> Cockpit</a>
+        <a href="#/live" data-route="live"><span aria-hidden="true">≋</span> Live Tail</a>
+        <a href="#/investigate" data-route="investigate"><span aria-hidden="true">⌕</span> Investigate</a>
+        <a href="#/detections" data-route="detections"><span aria-hidden="true">⚑</span> Detections</a>
+        <a href="#/cases" data-route="cases"><span aria-hidden="true">▤</span> Cases</a>
+        <a href="#/copilot" data-route="copilot"><span aria-hidden="true">✦</span> Copilot</a>
+        <a href="#/attack" data-route="attack"><span aria-hidden="true">▦</span> ATT&amp;CK</a>
+        <a href="#/graph" data-route="graph"><span aria-hidden="true">⟁</span> Graph &amp; Flows</a>
+        <a href="#/intel" data-route="intel"><span aria-hidden="true">◎</span> Intel &amp; Risk</a>
+        <a href="#/playbooks" data-route="playbooks"><span aria-hidden="true">⇶</span> Playbooks</a>
+        <a href="#/evidence" data-route="evidence"><span aria-hidden="true">⛨</span> Evidence</a>
+        <a href="#/compliance" data-route="compliance"><span aria-hidden="true">✓</span> Compliance</a>
+        <a href="#/cluster" data-route="cluster"><span aria-hidden="true">⌘</span> Cluster &amp; Runtime</a>
+        <a href="#/fleet" data-route="fleet"><span aria-hidden="true">⬡</span> Fleet</a>
+        <a href="#/settings" data-route="settings"><span aria-hidden="true">⚙</span> Settings</a>
+      </nav>
+      <div class="who" id="who" aria-live="polite"></div>
+    </aside>
+    <div class="content">
+      <header class="top">
+        <button class="icon-btn menu" id="menu" aria-label="Toggle navigation">☰</button>
+        <h1 id="title">Cockpit</h1>
+        <div class="top-right">
+          <label class="tenant">Tenant <select id="tenant" aria-label="Tenant"></select></label>
+          <span class="live" id="live" title="Live stream status" aria-live="polite">● offline</span>
+        </div>
+      </header>
+      <main id="main" tabindex="-1"></main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <dialog id="dlg"><form method="dialog"><div id="dlg-body"></div><menu><button value="cancel">Close</button></menu></form></dialog>
+</body>
+</html>

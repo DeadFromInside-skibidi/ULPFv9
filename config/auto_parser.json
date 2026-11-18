@@ -1,0 +1,152 @@
+{
+  "version": "1.0.0",
+  "active_profile": "soc",
+
+  "profiles": {
+    "soc": {
+      "description": "SOC — adaptive, faster promotion, higher learning budget",
+      "auto_discovery": true,
+      "auto_promotion": true,
+      "learning_budget_pct": 25,
+      "min_samples_for_promotion": 50,
+      "template_stability_window": 20,
+      "canary_duration_sec": 60,
+      "canary_traffic_pct": 5,
+      "max_active_templates": 10000,
+      "max_candidate_templates": 5000,
+      "signed_artifacts": false,
+      "audit_trail": "standard",
+      "offline_only": false,
+      "native_confidence_threshold": 0.75,
+      "promotion_thresholds": {
+        "min_accuracy": 0.90,
+        "min_field_stability": 0.85,
+        "min_type_stability": 0.90,
+        "negative_test_pass": true,
+        "replay_success_rate": 0.95,
+        "max_parse_time_ms": 1.0
+      },
+      "drift_thresholds": {
+        "miss_rate_trigger": 0.10,
+        "field_mismatch_trigger": 0.05,
+        "type_conflict_trigger": 0.03,
+        "evaluation_window_events": 1000
+      },
+      "poisoning_limits": {
+        "per_source_unknown_events_per_sec": 500,
+        "per_source_new_clusters_per_sec": 50,
+        "max_template_length_tokens": 256,
+        "max_token_count_per_event": 512,
+        "max_sample_size_per_candidate": 1000,
+        "max_learning_cpu_pct": 25,
+        "max_learning_ram_mb": 512,
+        "queue_overflow_policy": "sample"
+      }
+    },
+
+    "industrial": {
+      "description": "Industrial / OT — stability-oriented promotion, more canary time",
+      "auto_discovery": true,
+      "auto_promotion": false,
+      "learning_budget_pct": 15,
+      "min_samples_for_promotion": 200,
+      "template_stability_window": 100,
+      "canary_duration_sec": 300,
+      "canary_traffic_pct": 2,
+      "max_active_templates": 5000,
+      "max_candidate_templates": 2000,
+      "signed_artifacts": true,
+      "audit_trail": "full",
+      "offline_only": false,
+      "native_confidence_threshold": 0.85,
+      "promotion_thresholds": {
+        "min_accuracy": 0.95,
+        "min_field_stability": 0.92,
+        "min_type_stability": 0.95,
+        "negative_test_pass": true,
+        "replay_success_rate": 0.98,
+        "max_parse_time_ms": 0.5
+      },
+      "drift_thresholds": {
+        "miss_rate_trigger": 0.05,
+        "field_mismatch_trigger": 0.03,
+        "type_conflict_trigger": 0.02,
+        "evaluation_window_events": 5000
+      },
+      "poisoning_limits": {
+        "per_source_unknown_events_per_sec": 200,
+        "per_source_new_clusters_per_sec": 20,
+        "max_template_length_tokens": 128,
+        "max_token_count_per_event": 256,
+        "max_sample_size_per_candidate": 500,
+        "max_learning_cpu_pct": 10,
+        "max_learning_ram_mb": 256,
+        "queue_overflow_policy": "drop"
+      }
+    },
+
+    "defense": {
+      "description": "Defense — strictest validation, policy-controlled promotion, signed + offline",
+      "auto_discovery": true,
+      "auto_promotion": false,
+      "learning_budget_pct": 10,
+      "min_samples_for_promotion": 500,
+      "template_stability_window": 200,
+      "canary_duration_sec": 600,
+      "canary_traffic_pct": 1,
+      "max_active_templates": 2000,
+      "max_candidate_templates": 500,
+      "signed_artifacts": true,
+      "audit_trail": "full_tamper_evident",
+      "offline_only": true,
+      "native_confidence_threshold": 0.92,
+      "promotion_thresholds": {
+        "min_accuracy": 0.98,
+        "min_field_stability": 0.97,
+        "min_type_stability": 0.98,
+        "negative_test_pass": true,
+        "replay_success_rate": 0.99,
+        "max_parse_time_ms": 0.5
+      },
+      "drift_thresholds": {
+        "miss_rate_trigger": 0.02,
+        "field_mismatch_trigger": 0.01,
+        "type_conflict_trigger": 0.01,
+        "evaluation_window_events": 10000
+      },
+      "poisoning_limits": {
+        "per_source_unknown_events_per_sec": 100,
+        "per_source_new_clusters_per_sec": 10,
+        "max_template_length_tokens": 128,
+        "max_token_count_per_event": 256,
+        "max_sample_size_per_candidate": 200,
+        "max_learning_cpu_pct": 5,
+        "max_learning_ram_mb": 128,
+        "queue_overflow_policy": "drop"
+      }
+    }
+  },
+
+  "parser_families": {
+    "network": {
+      "sub_families": ["firewall", "router", "ids", "proxy", "switch", "loadbalancer"],
+      "description": "Network infrastructure devices"
+    },
+    "identity": {
+      "sub_families": ["auth", "ldap", "kerberos", "iam", "radius", "saml"],
+      "description": "Identity and access management"
+    },
+    "endpoint": {
+      "sub_families": ["process", "file", "security", "registry", "service"],
+      "description": "Endpoint / host-based telemetry"
+    },
+    "industrial": {
+      "sub_families": ["plc", "scada", "historian", "controller", "hmi", "rtu"],
+      "description": "Industrial control systems and OT"
+    },
+    "application": {
+      "sub_families": ["web", "database", "middleware", "custom"],
+      "description": "Application-layer logs"
+    }
+  }
+}

@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  engine:
+    name: Engine, API, APG & integrity (${{ matrix.os }}, py${{ matrix.python }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install (server profile, no GUI)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[api]"
+      - name: Core suite (engine, parsers, storage, forensics, correlation, APG, workers, REST API)
+        run: python -m unittest tests.test_core tests.test_platform_and_listener -v
+      - name: Auto-Parser generalisation evaluation
+        run: python -m benchmarks.apg_eval
+      - name: Integrity & security suite
+        run: python -m benchmarks.integrity_suite
+
+  runtime:
+    name: Live runtime, connectors, USPs, chaos (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    env:
+      ULPF_CHAOS_OUTAGE_S: "15"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e ".[api,dev]"
+      - name: Runtime (config, journal, buffers, seals, exactly-once, replay)
+        run: python -m unittest tests.test_runtime -v
+      - name: Inputs and outputs against local fakes
+        run: python -m unittest tests.test_inputs tests.test_outputs -v
+      - name: The five USPs on the live pipeline
+        run: python -m unittest tests.test_usp -v
+      - name: Onboarding, plugins, schema registry, raw traceability, ML export
+        run: python -m unittest tests.test_extensibility -v
+      - name: API roles, reload, multi-node failover
+        run: python -m unittest tests.test_operations -v
+      - name: Problem-statement coverage (MQTT, databases, EDR, Grafana, ML)
+        run: python -m unittest tests.test_coverage -v
+      - name: Chaos (kill -9, sink outage, full buffers, partition, DLQ bound)
+        run: python -m unittest tests.test_chaos -v
+      - name: Schema registry is current
+        run: python -m ulpf.main schema diff 1.0.0 current
+
+  docker:
+    name: Container health check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up -d --build
+      - name: Wait for /api/v1/health, then send a syslog line and see it journaled
+        run: |
+          for i in $(seq 1 60); do curl -fs localhost:8000/api/v1/health && break; sleep 2; done
+          curl -fs localhost:8000/api/v1/health
+          printf '<34>Oct 11 22:14:15 h app: ci smoke\n' | nc -q1 127.0.0.1 5514
+          sleep 3
+          curl -fs localhost:8000/api/v1/runtime/status | python3 -c "import json,sys; d=json.load(sys.stdin); assert d['journal']['records_written'] >= 1, d"
+      - if: always()
+        run: docker compose logs --no-color | tail -n 100
+
+  native:
+    name: Compiled core equivalence (ubuntu)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: dtolnay/rust-toolchain@stable
+      - run: python -m pip install -e ".[dev]"
+      - run: PYTHON=python sh scripts/build_native.sh
+      - run: python -m unittest tests.test_native -v
+
+  desktop:
+    name: Desktop GUI (windows)
+    runs-on: windows-latest
+    env:
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install -e ".[api,gui]"
+      - run: python tests/test_service_and_gui.py
+      - run: python tests/test_audit_fixes.py
+      - run: python -m ulpf.gui.qt_app --verify

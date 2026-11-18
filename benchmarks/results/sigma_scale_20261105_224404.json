@@ -1,0 +1,61 @@
+{
+ "events": 20000,
+ "sigmahq_rules": 3302,
+ "load_errors": 0,
+ "results": {
+  "mixed_formats": {
+   "none": {
+    "eps": 39441,
+    "native_analytics": true,
+    "vs_empty_pct": 25.7
+   },
+   "empty": {
+    "eps": 31371,
+    "native_analytics": true,
+    "vs_empty_pct": 0.0
+   },
+   "builtin": {
+    "eps": 34003,
+    "native_analytics": true,
+    "vs_empty_pct": 8.4
+   },
+   "sigmahq_1000": {
+    "eps": 22301,
+    "native_analytics": true,
+    "vs_empty_pct": -28.9
+   },
+   "sigmahq_all": {
+    "eps": 17036,
+    "native_analytics": true,
+    "vs_empty_pct": -45.7
+   }
+  },
+  "sysmon_json": {
+   "none": {
+    "eps": 37579,
+    "native_analytics": true,
+    "vs_empty_pct": 2.0
+   },
+   "empty": {
+    "eps": 36843,
+    "native_analytics": true,
+    "vs_empty_pct": 0.0
+   },
+   "builtin": {
+    "eps": 27635,
+    "native_analytics": true,
+    "vs_empty_pct": -25.0
+   },
+   "sigmahq_1000": {
+    "eps": 20033,
+    "native_analytics": true,
+    "vs_empty_pct": -45.6
+   },
+   "sigmahq_all": {
+    "eps": 11504,
+    "native_analytics": true,
+    "vs_empty_pct": -68.8
+   }
+  }
+ }
+}

@@ -1,0 +1,23 @@
+# Vector: TCP socket in, newline-delimited JSON file out (the same shape as ULPF's file output).
+# Run by benchmarks/competitive/run.py with PORT and OUT set in the environment.
+data_dir = "${DATA_DIR}"
+
+[sources.tcp]
+type = "socket"
+mode = "tcp"
+address = "127.0.0.1:${PORT}"
+
+[transforms.parse]
+type = "remap"
+inputs = ["tcp"]
+# Comparable work: parse syslog when it is syslog, keep the raw line otherwise
+source = '''
+parsed, err = parse_syslog(.message)
+if err == null { . = merge(., parsed) }
+'''
+
+[sinks.out]
+type = "file"
+inputs = ["parse"]
+path = "${OUT}"
+encoding.codec = "json"

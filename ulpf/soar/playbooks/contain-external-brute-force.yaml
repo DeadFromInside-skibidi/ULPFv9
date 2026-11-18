@@ -1,0 +1,52 @@
+id: contain-external-brute-force
+name: Contain an external brute-force / password-spray source
+version: 3
+description: >
+  Triage the case, block the attacking address at the perimeter (analyst approval
+  required), force a password reset for the targeted account, and record evidence.
+  Internal (RFC 1918) sources are never blocked; they are handed to an analyst.
+inputs:
+  ip: {required: true}
+  user: {}
+  firewall: {default: perimeter-fw}
+  directory: {default: corp-ad}
+triggers:
+  techniques: [T1110, T1110.001, T1110.003]
+  levels: [high, critical]
+steps:
+  - id: triage
+    action: case.transition
+    with: {state: triaged, note: "auto-triaged by playbook (brute force)"}
+    on_failure: continue
+  - id: is_external
+    type: condition
+    needs: [triage]
+    trigger: all_done
+    if: "not (cidr_contains('10.0.0.0/8', inputs.ip) or cidr_contains('172.16.0.0/12', inputs.ip) or cidr_contains('192.168.0.0/16', inputs.ip) or cidr_contains('127.0.0.0/8', inputs.ip))"
+    then: [block_source]
+    else: [internal_note]
+  - id: block_source
+    connector: "{{ inputs.firewall }}"
+    action: block_ip
+    with: {ip: "{{ inputs.ip }}"}
+    retries: 3
+    retry_delay: 2
+  - id: internal_note
+    action: case.note
+    with: {text: "Source {{ inputs.ip }} is internal: not blocked automatically; investigate the host."}
+  - id: reset_password
+    connector: "{{ inputs.directory }}"
+    action: reset_password_required
+    when: "inputs.user"
+    needs: [triage]
+    trigger: all_done
+    with: {user: "{{ inputs.user }}"}
+    on_failure: continue
+  - id: record
+    action: case.add_artifact
+    needs: [block_source, internal_note, reset_password]
+    trigger: all_done
+    with:
+      kind: report
+      name: brute-force-containment.json
+      data: {ip: "{{ inputs.ip }}", user: "{{ inputs.user }}", blocked: "{{ steps.block_source.status }}"}

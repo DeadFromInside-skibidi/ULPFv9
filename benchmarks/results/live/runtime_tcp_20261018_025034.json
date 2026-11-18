@@ -1,0 +1,96 @@
+{
+  "target": "runtime",
+  "proto": "tcp",
+  "workers": 3,
+  "offered_rate": "unpaced",
+  "events": 200000,
+  "sent": 200000,
+  "send_seconds": 0.343,
+  "send_rate": 583521.0,
+  "received": 200000,
+  "queue_dropped": 0,
+  "parsed": 200000,
+  "failed": 0,
+  "persisted": 200000,
+  "loss": {
+    "network": 0,
+    "queue": 0,
+    "processing": 0,
+    "storage": 0,
+    "total": 0
+  },
+  "persisted_eps": 14850.0,
+  "drain_lag_seconds": 13.125,
+  "first_persist_seconds": 1.036,
+  "series": [
+    [
+      0.271,
+      0
+    ],
+    [
+      1.293,
+      6000
+    ],
+    [
+      2.307,
+      21000
+    ],
+    [
+      3.317,
+      39000
+    ],
+    [
+      4.323,
+      57000
+    ],
+    [
+      5.343,
+      75000
+    ],
+    [
+      6.352,
+      90000
+    ],
+    [
+      7.377,
+      108000
+    ],
+    [
+      8.394,
+      123000
+    ],
+    [
+      9.406,
+      138000
+    ],
+    [
+      10.428,
+      159000
+    ],
+    [
+      11.448,
+      174000
+    ],
+    [
+      12.463,
+      189000
+    ],
+    [
+      13.468,
+      200000
+    ]
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}

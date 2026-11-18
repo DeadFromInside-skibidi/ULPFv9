@@ -1,0 +1,59 @@
+# ULPF 10 — full SIEM on one machine, every feature live on incoming traffic.
+#
+#   Windows:  START_SIEM.bat              Linux/macOS:  scripts/start_siem.sh
+#   or        ulpf run -c config/pipeline.live.yaml     then open http://127.0.0.1:8000/console/
+#
+# Send logs:  syslog UDP/TCP 5514 (RFC 3164/5424, CEF, LEEF, JSON, key=value), HTTP POST
+#             /api/v1/ingest/stream/<source>, OTLP /v1/logs. Test traffic: python scripts/log_sender.py
+#
+# Performance notes (the defaults below are the fast path):
+#   * workers: auto            one worker process per core; the compiled ulpf_core batch engine is used
+#                              automatically when built (scripts/build_native.ps1 / .sh), ~5x the Python path
+#   * journal.sync: interval   fsync every 200 ms (use "always" for defence-grade durability per write)
+#   * store partition: daily   bounded write cost, old days retired as whole files
+#   * detections, correlation, UEBA, risk and live tails all run on the stream, not on stored data
+# Before exposing the API beyond localhost set api.keys_file (ulpf apikey new --name soc --role analyst)
+# and api.tls.
+mode: industry
+workers: auto
+
+inputs:
+  - {type: syslog, name: syslog-udp, protocol: udp, host: 0.0.0.0, port: 5514}
+  - {type: syslog, name: syslog-tcp, protocol: tcp, host: 0.0.0.0, port: 5514}
+  - {type: http, name: http}
+  - {type: otlp, name: otlp}
+
+outputs:
+  - {type: duckdb, name: store, partition: daily}
+
+routes:
+  - {name: everything, to: [store]}
+
+journal:
+  sync: interval
+
+evidence:
+  enabled: true                 # every record sealed into signed Merkle chains (verify in the console: Evidence)
+
+analytics:
+  correlation: {enabled: true}
+  anomaly: {enabled: true}
+  sigma: {enabled: true}
+  ueba: {enabled: true}
+
+soar:
+  enabled: true                 # cases from high/critical detections, playbooks with approvals
+  auto_case_levels: [high, critical]
+  # connectors:                 # add your firewall / EDR / IdP; credentials only via *_env variables
+  #   - {name: perimeter-fw, type: panos, url: https://fw.example, api_key_env: PANOS_API_KEY}
+
+copilot:
+  enabled: true                 # offline; add model_path: <file.gguf> after `pip install "ulpf[copilot]"`
+
+limits:
+  hard_memory_mb: 0             # e.g. 2048 to enforce an OS-level ceiling (Job Object / cgroup v2)
+
+api:
+  enabled: true
+  host: 127.0.0.1               # 0.0.0.0 to serve other machines (then set keys_file and tls)
+  port: 8000

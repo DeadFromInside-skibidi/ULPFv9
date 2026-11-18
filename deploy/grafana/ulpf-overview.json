@@ -1,0 +1,106 @@
+{
+  "title": "ULPF overview (ECS view in Elasticsearch / OpenSearch)",
+  "uid": "ulpf-overview",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": {"from": "now-24h", "to": "now"},
+  "refresh": "30s",
+  "tags": ["ulpf", "security", "ecs"],
+  "templating": {
+    "list": [
+      {"name": "ds", "type": "datasource", "query": "elasticsearch", "label": "Data source"}
+    ]
+  },
+  "annotations": {"list": []},
+  "panels": [
+    {
+      "id": 1, "type": "timeseries", "title": "Events per minute by category",
+      "gridPos": {"x": 0, "y": 0, "w": 16, "h": 8},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "ulpf.event_kind:log",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [
+          {"id": "2", "type": "terms", "field": "event.category", "settings": {"size": "12", "order": "desc", "orderBy": "_count"}},
+          {"id": "3", "type": "date_histogram", "field": "@timestamp", "settings": {"interval": "1m"}}
+        ],
+        "timeField": "@timestamp"
+      }]
+    },
+    {
+      "id": 2, "type": "stat", "title": "High and critical events",
+      "gridPos": {"x": 16, "y": 0, "w": 8, "h": 8},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "ulpf.event_kind:log AND event.severity:>=7",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [{"id": "2", "type": "date_histogram", "field": "@timestamp", "settings": {"interval": "auto"}}],
+        "timeField": "@timestamp"
+      }]
+    },
+    {
+      "id": 3, "type": "table", "title": "Top source addresses (blocked or failed)",
+      "gridPos": {"x": 0, "y": 8, "w": 12, "h": 9},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "event.outcome:failure OR event.action:(blocked OR denied OR dropped OR failed)",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [
+          {"id": "2", "type": "terms", "field": "source.ip", "settings": {"size": "20", "order": "desc", "orderBy": "_count"}},
+          {"id": "3", "type": "terms", "field": "source.geo.country_iso_code", "settings": {"size": "1"}}
+        ],
+        "timeField": "@timestamp"
+      }]
+    },
+    {
+      "id": 4, "type": "table", "title": "Threat-intel matches",
+      "gridPos": {"x": 12, "y": 8, "w": 12, "h": 9},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "_exists_:threat.indicator.name",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [
+          {"id": "2", "type": "terms", "field": "threat.indicator.name", "settings": {"size": "20", "order": "desc", "orderBy": "_count"}},
+          {"id": "3", "type": "terms", "field": "observer.hostname", "settings": {"size": "5"}}
+        ],
+        "timeField": "@timestamp"
+      }]
+    },
+    {
+      "id": 5, "type": "table", "title": "Analytics: correlation groups, format drift, anomalies, seals",
+      "gridPos": {"x": 0, "y": 17, "w": 24, "h": 9},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "ulpf.event_kind:(correlation OR drift OR anomaly OR seal)",
+        "metrics": [{"id": "1", "type": "raw_data", "settings": {"size": "100"}}],
+        "bucketAggs": [],
+        "timeField": "@timestamp"
+      }],
+      "options": {"showHeader": true},
+      "fieldConfig": {"defaults": {}, "overrides": []},
+      "transformations": [{"id": "organize", "options": {"includeByName": {"@timestamp": true, "ulpf.event_kind": true, "message": true, "event.severity": true}}}]
+    },
+    {
+      "id": 6, "type": "barchart", "title": "Events by user",
+      "gridPos": {"x": 0, "y": 26, "w": 12, "h": 8},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "_exists_:user.name",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [{"id": "2", "type": "terms", "field": "user.name", "settings": {"size": "15", "order": "desc", "orderBy": "_count"}}],
+        "timeField": "@timestamp"
+      }]
+    },
+    {
+      "id": 7, "type": "piechart", "title": "Formats (how each event was parsed)",
+      "gridPos": {"x": 12, "y": 26, "w": 12, "h": 8},
+      "datasource": {"type": "elasticsearch", "uid": "${ds}"},
+      "targets": [{
+        "refId": "A", "query": "ulpf.event_kind:log",
+        "metrics": [{"id": "1", "type": "count"}],
+        "bucketAggs": [{"id": "2", "type": "terms", "field": "ulpf.raw_format", "settings": {"size": "12"}}],
+        "timeField": "@timestamp"
+      }]
+    }
+  ]
+}

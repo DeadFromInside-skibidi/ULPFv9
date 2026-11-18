@@ -1,0 +1,17 @@
+{
+  "_note": "Every number here was measured; the result file is named next to it. Update after re-running a benchmark, then rebuild both documents.",
+  "u1": "learned from 300 live lines without a restart; >= 99 % of the next 1,000 lines parsed by it; in defence mode 0 events used it before approval",
+  "u2": "5,000 events in 5 seals; an edited column, a nulled MAC and a rewritten hash each located at the exact record",
+  "u5": "a vendor field rename gives 1 drift event within 1,000 lines; a 5-step kill chain across 2 inputs gives 1 correlation group",
+  "onboarding": "a 200-line sample becomes an active parser in 0.15 s, with 100 % coverage",
+  "performance": [
+    ["3 workers, industry defaults (journal, seals, drift, anomaly, correlation)", "17,034 ev/s, 0 lost", "live/runtime_tcp_20261022_024708.json"],
+    ["6 workers, industry defaults", "26,952 ev/s, 0 lost", "live/runtime_tcp_20261022_024737.json"],
+    ["3 workers + per-row MACs (defence default)", "15,030 ev/s, 0 lost", "live/runtime_tcp_20261022_024758.json"],
+    ["2 nodes x 3 workers on the same 4-core host", "20,934 ev/s, 0 lost", "multinode/multinode_2x3_20261022_024851.json"],
+    ["Soak: 60 min at 5,000 ev/s, 7 workers, 18,000,000 events", "0 lost; workers memory-flat", "soak/soak_20261023_012358.json"],
+    ["Single core, parse + normalise + enrich only", "~12,500 ev/s", "live/profile_core_*.json"]
+  ],
+  "sizing": "One billion events a day is about 11,600 events/s on average. One 6-worker node on this laptop persisted 26,952 events/s, about 2.3 billion a day. Nodes share nothing on the data path, so capacity adds per node. Plan nodes at about 60 % of the rate measured on the target hardware, to leave headroom for bursts and post-outage drains. The embedded DuckDB store's memory grows with stored rows, so at sustained high volume keep it for a retention window and send bulk data to the Parquet lake or a SIEM.",
+  "coverage": "Every source class (network devices, servers and OS, applications, databases, cloud, containers, EDR, IAM, IoT, hardware) and every expected solution a–k has an implementation and a test; see docs/PROBLEM_STATEMENT_COVERAGE.md. Open: the Kafka and Event Hubs connectors are config-validated only (no broker or SDK available), the competitive comparison was not run (Vector, Logstash and Fluent Bit are not installed), and the throughput figures come from a laptop, so server sizing must be measured on the target hardware."
+}

@@ -1,0 +1,11 @@
+LEEF:1.0|Snort|Snort IDS|3.1|1000001|devTime=2024-08-28 10:15:01	cat=attempted-recon	src=45.33.32.156	dst=192.168.1.10	srcPort=54321	dstPort=80	proto=TCP	sev=5	msg=SCAN nmap -sS detected
+LEEF:1.0|Suricata|Suricata IDS|7.0|2100498|devTime=2024-08-28 10:15:05	cat=web-application-attack	src=185.220.101.1	dst=10.0.1.50	srcPort=49000	dstPort=443	proto=TCP	sev=8	msg=ET EXPLOIT Possible SQL Injection Attempt
+LEEF:1.0|Snort|Snort IDS|3.1|1000002|devTime=2024-08-28 10:15:10	cat=attempted-admin	src=91.121.87.10	dst=10.0.1.25	srcPort=22	dstPort=22	proto=TCP	sev=7	msg=SSH brute force login attempt detected
+LEEF:1.0|Suricata|Suricata IDS|7.0|2200074|devTime=2024-08-28 10:15:15	cat=trojan-activity	src=103.224.182.250	dst=192.168.5.100	srcPort=80	dstPort=52000	proto=TCP	sev=9	msg=ET MALWARE Trojan.Win32.Agent callback detected
+CustomAppAudit: time="2024-08-28 10:15:30" evt="user_action" u="guest" act="reset" src="172.16.0.4"
+LEEF:1.0|Snort|Snort IDS|3.1|1000003|devTime=2024-08-28 10:15:20	cat=attempted-dos	src=177.54.150.200	dst=10.0.0.1	srcPort=0	dstPort=0	proto=ICMP	sev=6	msg=ICMP flood attack detected from botnet
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User admin logged in from 192.168.1.5
+LEEF:1.0|Suricata|Suricata IDS|7.0|2300015|devTime=2024-08-28 10:15:25	cat=policy-violation	src=192.168.1.100	dst=198.51.100.99	srcPort=55555	dstPort=6666	proto=TCP	sev=4	msg=Suspicious outbound connection to known data exfil port
+LEEF:1.0|Snort|Snort IDS|3.1|1000004|devTime=2024-08-28 10:15:30	cat=network-scan	src=45.33.32.156	dst=10.0.0.0	srcPort=12345	dstPort=1433	proto=TCP	sev=5	msg=SQL Server port scan from external
+UNKNOWN-APP-LOG | 2024-08-28 10:15:30 | User system logged in from 192.168.1.5
+LEEF:1.0|Suricata|Suricata IDS|7.0|2400001|devTime=2024-08-28 10:15:35	cat=web-application-attack	src=185.220.101.2	dst=10.0.1.50	srcPort=51000	dstPort=80	proto=TCP	sev=8	msg=ET WEB_SERVER Cross-Site Scripting Attempt

@@ -1,0 +1,108 @@
+{
+  "@timestamp": "2026-10-11T22:14:15+00:00",
+  "ecs": {
+    "version": "8.11.0"
+  },
+  "event": {
+    "action": "failed",
+    "category": [
+      "authentication"
+    ],
+    "created": "2026-10-21T10:00:00+00:00",
+    "dataset": "syslog",
+    "hash": "f4331f97e53b60a81885e6c2c8460cb0ef7b0e7341b824d0592443f83f4a8b10",
+    "id": "00000000-0000-8000-8000-000000000011",
+    "kind": "event",
+    "original": "<34>Oct 11 22:14:15 db01 sshd[4721]: Failed password for root from 45.33.32.156 port 51234 ssh2",
+    "outcome": "failure",
+    "severity": 9,
+    "type": [
+      "syslog_rfc3164"
+    ]
+  },
+  "message": "Failed password for root from 45.33.32.156 port 51234 ssh2",
+  "observer": {
+    "hostname": "db01",
+    "product": "sshd",
+    "vendor": "Generic"
+  },
+  "related": {
+    "hosts": [
+      "db01"
+    ],
+    "ip": [
+      "45.33.32.156"
+    ],
+    "user": [
+      "root"
+    ]
+  },
+  "source": {
+    "address": "45.33.32.156",
+    "geo": {
+      "city_name": "Fremont",
+      "country_iso_code": "US",
+      "country_name": "United States",
+      "location": {
+        "lat": 37.5485,
+        "lon": -121.9886
+      }
+    },
+    "ip": "45.33.32.156",
+    "port": 51234
+  },
+  "tags": [
+    "threat:scanner",
+    "ioc_match",
+    "critical_severity",
+    "category:authentication"
+  ],
+  "threat": {
+    "indicator": {
+      "confidence": 0.95,
+      "name": "45.33.32.156",
+      "type": "ip"
+    }
+  },
+  "ulpf": {
+    "category": "authentication",
+    "event_kind": "log",
+    "evidence": {
+      "raw_hash": "f4331f97e53b60a81885e6c2c8460cb0ef7b0e7341b824d0592443f83f4a8b10"
+    },
+    "metadata": {
+      "detection_confidence": 0.92,
+      "ingestion_time": "2026-10-21T10:00:00+00:00",
+      "normalization_version": "1.1.0",
+      "parser_id": "syslog",
+      "parser_name": "Syslog Parser",
+      "parser_version": "1.1.0",
+      "pipeline_version": "1.1.0",
+      "raw_hash_sha256": "f4331f97e53b60a81885e6c2c8460cb0ef7b0e7341b824d0592443f83f4a8b10",
+      "schema_version": "1.1.0"
+    },
+    "parsed_fields": {
+      "action": "failed",
+      "app_name": "sshd",
+      "devname": "db01",
+      "facility": "4",
+      "facility_name": "auth",
+      "hostname": "db01",
+      "message": "Failed password for root from 45.33.32.156 port 51234 ssh2",
+      "pid": "4721",
+      "pri": "34",
+      "src_ip": "45.33.32.156",
+      "src_port": "51234",
+      "syslog_severity": "2",
+      "timestamp": "Oct 11 22:14:15",
+      "user": "root"
+    },
+    "raw_format": "syslog",
+    "severity_label": "critical",
+    "threat_category": "Scanner",
+    "timestamp_original": "Oct 11 22:14:15"
+  },
+  "user": {
+    "name": "root"
+  }
+}

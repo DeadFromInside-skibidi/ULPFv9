@@ -1,0 +1,22 @@
+services:
+  ulpf:
+    build: .
+    container_name: ulpf
+    ports:
+      - "8000:8000"          # REST API, HTTP and OTLP ingest
+      - "5514:5514/tcp"      # syslog TCP
+      - "5514:5514/udp"      # syslog UDP
+      # - "6514:6514/tcp"    # syslog TLS (add a tls input to the config)
+    volumes:
+      - ulpf-data:/app/output                                   # journal, store, evidence, learned parsers
+      - ./config/pipeline.docker.yaml:/app/config/pipeline.docker.yaml:ro
+      # - ./config/geoip:/app/config/geoip:ro                   # GeoLite2 / DB-IP .mmdb files
+    environment:
+      - PYTHONUNBUFFERED=1
+      # - ULPF_API_KEY=change-me        # admin key for the API (or mount api.keys_file)
+      # - ULPF_INGEST_KEY=change-me     # key for HTTP / OTLP ingest
+    stop_grace_period: 60s             # inputs stop, workers and sinks drain
+    restart: unless-stopped
+
+volumes:
+  ulpf-data:

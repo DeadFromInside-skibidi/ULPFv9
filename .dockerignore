@@ -1,0 +1,35 @@
+python311/
+.git/
+.github/
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+output/
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.ulj
+*.key
+*.pem
+# Native build tree and locally compiled cores (the image builds its own)
+native/ulpf_core/target/
+ulpf/ulpf_core*.pyd
+ulpf/ulpf_core*.so
+# Benchmark corpora and archives (hundreds of MB); result JSON is not needed at runtime
+benchmarks/results/
+benchmarks/*.zip
+incubation_pack/
+tests/
+docs/
+scripts/
+*.bat
+*.md
+!README.md

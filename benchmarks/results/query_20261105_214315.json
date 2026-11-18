@@ -1,0 +1,56 @@
+{
+ "events": 500000,
+ "build_s": 9.5,
+ "cpus": 8,
+ "queries": [
+  {
+   "dialect": "kql",
+   "query": "events | where action == 'login_failed' | summarize count() by user.name | top 10 by count_",
+   "median_ms": 125.0,
+   "rows": 10
+  },
+  {
+   "dialect": "kql",
+   "query": "events | where TimeGenerated > datetime(2026-11-05 10:00) | summarize n = count() by bin(TimeGenerated, 1h), category",
+   "median_ms": 125.0,
+   "rows": 12
+  },
+  {
+   "dialect": "kql",
+   "query": "events | where source.ip startswith '10.1.' and severity >= 7 | project timestamp, source.ip, message | take 100",
+   "median_ms": 15.0,
+   "rows": 100
+  },
+  {
+   "dialect": "kql",
+   "query": "events | where raw_event has 'root' | summarize dcount(source.ip) by device.hostname",
+   "median_ms": 250.0,
+   "rows": 40
+  },
+  {
+   "dialect": "spl",
+   "query": "from events where action = \"login_failed\" | stats count() AS n, dc(src) AS ips BY user | sort -n | head 10",
+   "median_ms": 140.0,
+   "rows": 10
+  },
+  {
+   "dialect": "spl",
+   "query": "search sshd root | timechart span=1h count() BY category",
+   "median_ms": 282.0,
+   "rows": 18
+  },
+  {
+   "dialect": "hql",
+   "query": "action=login_failed | groupBy([user.name], function=[count(), max(severity)]) | sort(_count, limit=10)",
+   "median_ms": 125.0,
+   "rows": 10
+  },
+  {
+   "dialect": "hql",
+   "query": "/from (?<ip>\\d+\\.\\d+\\.\\d+\\.\\d+)/ | groupBy(ip, limit=10)",
+   "median_ms": 438.0,
+   "rows": 10
+  }
+ ],
+ "live_4_tails_ms_per_1000_event_batch": 11.16
+}

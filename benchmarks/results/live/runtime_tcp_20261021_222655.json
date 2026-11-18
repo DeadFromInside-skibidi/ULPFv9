@@ -1,0 +1,80 @@
+{
+  "target": "runtime",
+  "proto": "tcp",
+  "workers": 6,
+  "offered_rate": "unpaced",
+  "events": 300000,
+  "sent": 300000,
+  "send_seconds": 1.834,
+  "send_rate": 163600.1,
+  "received": 230889,
+  "queue_dropped": 0,
+  "parsed": 220889,
+  "failed": 0,
+  "persisted": 300000,
+  "loss": {
+    "network": 69111,
+    "queue": 0,
+    "processing": 10000,
+    "storage": 0,
+    "total": 0
+  },
+  "persisted_eps": 27460.0,
+  "drain_lag_seconds": 9.091,
+  "first_persist_seconds": 2.354,
+  "series": [
+    [
+      0.276,
+      0
+    ],
+    [
+      1.308,
+      0
+    ],
+    [
+      2.354,
+      6000
+    ],
+    [
+      3.612,
+      6000
+    ],
+    [
+      4.664,
+      6000
+    ],
+    [
+      5.69,
+      42000
+    ],
+    [
+      6.835,
+      42000
+    ],
+    [
+      7.925,
+      42000
+    ],
+    [
+      9.19,
+      42000
+    ],
+    [
+      10.394,
+      42000
+    ]
+  ],
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "python": "3.11.9",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+    "logical_cpus": 8,
+    "physical_cpus": 4,
+    "ram_gb": 15.8,
+    "cpu_model": "Intel(R) Core(TM) i5-8279U CPU @ 2.40GHz",
+    "duckdb_version": "1.5.6",
+    "pyarrow_version": "25.0.1",
+    "orjson_version": "3.12.0"
+  }
+}
