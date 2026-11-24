@@ -89,7 +89,7 @@ exclude = ["benchmarks*", "tests*", "native*", "docs*", "build*", "scripts*"]
 
 [tool.setuptools.package-data]
 ulpf = ["gui/resources/*", "plugin/manifest.json", "engine/schema_registry/*.json", "intelligence/sigma_rules/*.yml",
-        "console/static/*", "runtime/ebpf/*.c", "soar/playbooks/*.yaml"]
+        "console/static/*", "frontend/*", "frontend/**/*", "runtime/ebpf/*.c", "soar/playbooks/*.yaml"]
 
 # A locally built native core (maturin develop) is never shipped from the
 # source tree; wheels for it are built by native/ulpf_core.

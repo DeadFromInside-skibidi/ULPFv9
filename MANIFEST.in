@@ -14,5 +14,7 @@ prune incubation_pack
 prune .hypothesis
 global-exclude __pycache__ *.py[cod] *.pyd *.so *.dylib *.duckdb *.duckdb.wal *.parquet *.ulj *.key *.pem
 recursive-include ulpf/console/static *
+recursive-include ulpf/frontend *
+recursive-include frontend *
 recursive-include ulpf/runtime/ebpf *.c
 recursive-include ulpf/soar/playbooks *.yaml

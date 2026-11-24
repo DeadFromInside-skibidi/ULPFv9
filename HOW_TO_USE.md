@@ -19,7 +19,17 @@ ULPF's desktop app is native PySide6. It needs no browser and no internet.
 
 ---
 
-## 2. The 10 desktop views
+## 1.1 Launch the Institutional Enterprise Web UI
+
+ULPF includes a full-featured Institutional Enterprise Web UI covering all 10 operational security views:
+
+- **Windows, one click:** double-click **`START_SIEM.bat`** (or **`LAUNCH_WEB.bat`**).
+- **Browser URL:** navigate to **`http://127.0.0.1:8000/`** (automatically redirects to `/static/index.html`).
+- **SOC Live Stream Console:** accessible directly via **`http://127.0.0.1:8000/console/`** or the sidebar shortcut in the Web UI.
+
+---
+
+## 2. The 10 operational views (Web & Desktop)
 
 1. **System Overview**: stored event count, the measured live parse/persist rate (events/s from worker counters, not a fixed number), format and category distribution, and a severity histogram (0–10).
 2. **Ingestion Console**:

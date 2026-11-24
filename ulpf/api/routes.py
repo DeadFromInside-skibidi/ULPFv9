@@ -396,9 +396,20 @@ def search_events(q: str, limit: int = Query(default=50, ge=1, le=500)):
 @router.get("/stats", tags=["Stats"], dependencies=READ)
 def get_stats():
     plugin = get_plugin()
+    status = _listener_manager.get_status()
+    cfg = status.get("config") or {}
+    listener_data = {
+        "is_running": status.get("running", False),
+        "host": cfg.get("host", "0.0.0.0"),
+        "port": cfg.get("port", 5514),
+        "protocol": cfg.get("protocol", "both"),
+        "packets_received": status.get("stats", {}).get("packets_received", 0),
+        "messages_dropped": status.get("stats", {}).get("messages_dropped", 0),
+    }
     return {
         "database": plugin.storage.stats(),
         "pipeline": plugin.pipeline.get_metrics(),
+        "listener": listener_data,
         "anomaly_baseline": plugin.anomaly_detector.get_baseline_report() if plugin.anomaly_detector else {},
         "uptime_seconds": round(time.time() - _started_at, 1),
     }
@@ -446,7 +457,14 @@ def prometheus_metrics():
 @router.get("/schema", tags=["Schema"], dependencies=READ)
 def get_schema():
     """The ULPF unified event schema (field catalogue, severity scale, categories)."""
-    return SCHEMA_DEFINITION
+    from ulpf.engine.schema import SCHEMA_GROUPS
+    plugin = get_plugin()
+    db_stats = plugin.storage.stats() if plugin else {}
+    res = dict(SCHEMA_DEFINITION)
+    res["categories"] = SCHEMA_GROUPS
+    res["groups"] = SCHEMA_GROUPS
+    res["total_events"] = db_stats.get("total_events", 0)
+    return res
 
 
 @router.get("/parsers", tags=["Parsers"], dependencies=READ)
@@ -528,6 +546,11 @@ def fingerprint(body: dict):
 def fingerprint_match(body: dict):
     fid, score = _dna().match(body.get("lines", []))
     return {"matched_id": fid, "similarity": round(score, 4)}
+
+
+@router.get("/fingerprints", tags=["Log DNA"], dependencies=READ)
+def list_fingerprints():
+    return {"fingerprints": _dna().list_known()}
 
 
 @router.post("/fingerprint/drift", tags=["Log DNA"], dependencies=READ)
@@ -675,6 +698,7 @@ def stop_listener():
     return result if result.get("success") else JSONResponse(result, 400)
 
 
+@router.get("/listener", tags=["Listener"], dependencies=READ)
 @router.get("/listener/status", tags=["Listener"], dependencies=READ)
 def listener_status():
     return _listener_manager.get_status()

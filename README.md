@@ -17,11 +17,12 @@
 # Docker:                     docker compose up
 ```
 
-Then open **http://127.0.0.1:8000/console/** and point devices at it: syslog UDP/TCP **5514**, HTTP
+Then open the **Web UI** at **http://127.0.0.1:8000/** (or the live SOC console at **http://127.0.0.1:8000/console/**) and point devices at it: syslog UDP/TCP **5514**, HTTP
 `POST /api/v1/ingest/stream/<source>`, OTLP `/v1/logs`. No devices yet? `python scripts/log_sender.py`
-sends realistic traffic. Every console page works on the live stream while packets arrive: the cockpit
-(EPS, bandwidth, buffer fill, drops), **Live Tail** (KQL/SPL2/HQL evaluated in the workers on each ingest
-batch), live detections, automatic cases and playbooks, evidence verification, intel, risk and UEBA.
+sends realistic traffic. The Enterprise Web UI gives you full operational control across 10 specialized views:
+Overview telemetry, Ingestion Engine, Columnar Log Explorer, Correlation, Log DNA, Statistical Anomalies,
+Cryptographic Forensics, OCSF Schema, Universal Parsers, and Auto-Learn JIT. The live SOC console streams
+cockpit metrics, Live Tail (KQL/SPL2/HQL), detections, and cases.
 
 For full speed, install the prebuilt wheel with native core from the [v10.0.0 Release](https://github.com/DeadFromInside-skibidi/ULPFv9/releases/tag/v10.0.0) (`pip install <whl>`), run `START_SIEM.bat` (which automatically fetches the prebuilt native core if missing), or build it locally (`scripts/build_native.ps1` / `.sh`): the workers then use the Rust batch engine and Sigma IR automatically. The launch config is [config/pipeline.live.yaml](config/pipeline.live.yaml).
 

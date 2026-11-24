@@ -38,6 +38,10 @@ def create_app(console: bool = True) -> FastAPI:
 
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     frontend_dir = os.path.join(project_root, "frontend")
+    if not os.path.isdir(frontend_dir):
+        pkg_frontend = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
+        if os.path.isdir(pkg_frontend):
+            frontend_dir = pkg_frontend
     if os.path.isdir(frontend_dir):
         from fastapi.responses import RedirectResponse
         from fastapi.staticfiles import StaticFiles

@@ -7,6 +7,7 @@ PY="${PYTHON:-python3}"
 CFG="${1:-config/pipeline.live.yaml}"
 echo "ULPF 10 - live SIEM"
 echo "  config : $CFG"
+echo "  web ui : http://127.0.0.1:8000/"
 echo "  console: http://127.0.0.1:8000/console/"
 echo "  ingest : syslog UDP/TCP 5514, HTTP /api/v1/ingest/stream/<source>, OTLP /v1/logs"
 if ! "$PY" -c "import ulpf.ulpf_core" 2>/dev/null; then
@@ -20,5 +21,5 @@ if ! "$PY" -c "import ulpf.ulpf_core" 2>/dev/null; then
     echo "  [+] loaded high-speed native engine (ulpf_core.so)"
   fi
 fi
-( sleep 6; command -v xdg-open >/dev/null && xdg-open http://127.0.0.1:8000/console/ >/dev/null 2>&1 || true ) &
+( sleep 6; command -v xdg-open >/dev/null && xdg-open http://127.0.0.1:8000/ >/dev/null 2>&1 || true ) &
 exec "$PY" -m ulpf.main run -c "$CFG"
