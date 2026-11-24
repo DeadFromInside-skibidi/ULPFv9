@@ -450,6 +450,12 @@ class Database(StorageBackend):
                 if self._table_exists("events"):
                     # A v9.0 single-table store: kept, read-only, as the oldest partition
                     self.conn.execute("ALTER TABLE events ADD COLUMN IF NOT EXISTS row_mac VARCHAR")
+                    try:
+                        idxs = self.conn.execute("SELECT index_name FROM duckdb_indexes() WHERE table_name = 'events'").fetchall()
+                        for (idx_name,) in idxs:
+                            self.conn.execute(f"DROP INDEX IF EXISTS {idx_name}")
+                    except Exception:
+                        pass
                     self.conn.execute("ALTER TABLE events RENAME TO events_legacy")
                     n = self.conn.execute("SELECT COUNT(*) FROM events_legacy").fetchone()[0]
                     self.conn.execute("INSERT OR IGNORE INTO ulpf_partitions VALUES "
